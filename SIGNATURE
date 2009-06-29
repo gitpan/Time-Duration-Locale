@@ -1,0 +1,52 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.55.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 8624bcdae55baeef00cd11d5dfcfa60f68710a02 COPYING
+SHA1 94899dc28405de4e19de6adeccbcd462f815bd18 Changes
+SHA1 d6ee02a1009594643fe319e29f6f12e4c1fe2ab5 MANIFEST
+SHA1 b5865f9ca790d9097868b9aa46e7104e59626131 MANIFEST.SKIP
+SHA1 bf4e64356e587bc5be86487109a80c4e5059eb25 META.yml
+SHA1 1b77b2290c97720010cadd2eda4d3a16987e8f1c Makefile.PL
+SHA1 f0cde2291ac124ba0791d8ea29c268719a5a81ec README
+SHA1 84c414c02ae3abcc3f47debb6ae1805806f4f853 debian/changelog
+SHA1 ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 debian/compat
+SHA1 25aab87c588dbbddb6ec2d76424908e110039ae1 debian/control
+SHA1 df292ad5f885a99bf136118aede8283861910136 debian/copyright
+SHA1 cdbce099f4915aabbd7dd379e63f2e34a7ccbffb debian/rules
+SHA1 b5fe4a58fb500050deff80a3a3541ae0b53e96e1 debian/watch
+SHA1 e989bbb790775adb1b932c13039fe9326131b1ea devel/exported-autoload.pl
+SHA1 b5a03b00aef04b6aca0c171f353654bf827ebae6 devel/exported-autoload2.pl
+SHA1 314984f779f2b6aa07a1e81aa80071c4318ba5e5 devel/lib/Module/DynamicDelegate.pm
+SHA1 8ae04d60c1c32f3ab27010b651cd216d12c0a875 devel/run-obj.pl
+SHA1 91e5c77f86c372b3cedd7b33421b90b833be1a6b devel/run.pl
+SHA1 d0b5c31914d79d9f82b720de97e48504cfdb4c44 examples/simple.pl
+SHA1 6619e451a0a3378df5f20c91ae7a9afde2ecfa31 lib/Time/Duration/Locale.pm
+SHA1 c4e127e1fcc834d0d5f4cd6432849717119a937a lib/Time/Duration/LocaleObject.pm
+SHA1 0a31c7420e423e251481c2b3df1515a07a9a1bb6 t/0-META-read.t
+SHA1 a343ed4dce96d05de51eed1ec065911584b96fce t/0-Test-DistManifest.t
+SHA1 08742828a8bf6f21a999ed9760cbfbfcbc8f1c46 t/0-Test-Pod.t
+SHA1 45d7f65b852c0ff78ce4e1cd59286de552f7a493 t/0-Test-YAML-Meta.t
+SHA1 75351464013780065b2e704270481a51835b200e t/Locale-noimport.t
+SHA1 1fd9090b5a7d3db7734384e378eed642133be3e7 t/Locale.t
+SHA1 eb4bcaa29f54fabe2a3c7d6c8012fbdb75658cd1 t/LocaleObject-ithreads.t
+SHA1 fee5266e3e758d27a4748961936e40b8aa20b6b5 t/LocaleObject.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.9 (GNU/Linux)
+
+iD8DBQFKSBsILFMCIV9q3ToRAgv0AKCT2Runp99X7y7Xyu3P3Wv3dGa4gwCfcuVm
+3h3GKJqKHMRzT/a5Xq3KbYM=
+=OHgm
+-----END PGP SIGNATURE-----
