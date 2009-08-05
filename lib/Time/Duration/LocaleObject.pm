@@ -27,7 +27,7 @@ use Class::Singleton;
 @ISA = ('Class::Singleton');
 *_new_instance = \&new;
 
-$VERSION = 1;
+$VERSION = 2;
 
 use constant DEBUG => 0;
 
@@ -372,7 +372,7 @@ L<Time::Duration::sv>
 
 =head1 HOME PAGE
 
-L<http://user42.tuxfamily.org/time-duration-locale/index.html>
+http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
@@ -389,6 +389,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
 more details.
 
 You should have received a copy of the GNU General Public License along with
-Time-Duration-Locale.  If not, see L<http://www.gnu.org/licenses/>.
+Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 =cut

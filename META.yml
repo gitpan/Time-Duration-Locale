@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:                Time-Duration-Locale
-version:             1
+version:             2
 abstract:            Dispatch to language-specific Time::Duration module.
 license:             gpl
 author:              
@@ -25,10 +25,10 @@ optional_features:
     maximum_tests:
         description: Have "make test" do as much as possible.
         requires:
-            Parse::CPAN::Meta: 0
             Test::Pod: 1.00
             Test::NoWarnings: 0
             Test::DistManifest: 0
+            Parse::CPAN::Meta: 0
             Test::YAML::Meta: 0
             YAML: 0
             YAML::Syck: 0
@@ -36,10 +36,11 @@ optional_features:
             YAML::XS: 0
 no_index:
     directory:
-        - t
         - devel
+        - inc
         - junk
         - maybe
+        - t
 resources:
     homepage: http://user42.tuxfamily.org/time-duration-locale/index.html
     license: http://www.gnu.org/licenses/gpl.html

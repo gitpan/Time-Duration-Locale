@@ -19,56 +19,48 @@
 
 use strict;
 use warnings;
-use Time::Duration::Locale;
-use Test::More tests => 30;
+use Time::Duration::en_PIGLATIN;
+use Test::More tests => 34;
 
 SKIP: { eval 'use Test::NoWarnings; 1'
           or skip 'Test::NoWarnings not available', 1; }
 
 my $want_version = 2;
-cmp_ok ($Time::Duration::Locale::VERSION, '>=', $want_version,
+cmp_ok ($Time::Duration::en_PIGLATIN::VERSION, '>=', $want_version,
         'VERSION variable');
-cmp_ok (Time::Duration::Locale->VERSION,  '>=', $want_version,
+cmp_ok (Time::Duration::en_PIGLATIN->VERSION,  '>=', $want_version,
         'VERSION class method');
-{ ok (eval { Time::Duration::Locale->VERSION($want_version); 1 },
+{ ok (eval { Time::Duration::en_PIGLATIN->VERSION($want_version); 1 },
       "VERSION class check $want_version");
   my $check_version = $want_version + 1000;
-  ok (! eval { Time::Duration::Locale->VERSION($check_version); 1 },
+  ok (! eval { Time::Duration::en_PIGLATIN->VERSION($check_version); 1 },
       "VERSION class check $check_version");
 }
 
 # $ENV{'LANGUAGE'} = 'en';
-# Time::Duration::Locale::setlocale();
-# is (Time::Duration::Locale::module(), 'Time::Duration');
+# Time::Duration::en_PIGLATIN::setlocale();
+# is (Time::Duration::en_PIGLATIN::module(), 'Time::Duration');
 
 
 {
-  my $can = Time::Duration::Locale->can('duration');
+  my $can = Time::Duration::en_PIGLATIN->can('duration');
   ok ($can, 'can(duration) true');
   is ($can && ref $can, 'CODE', 'can(duration) is a coderef');
   cmp_ok (&$can(1), 'ne', '', ' can(duration) call');
 }
 
 {
-  my $can = Time::Duration::Locale->can('language');
-  ok ($can, 'can(language) true');
-  is ($can && ref $can, 'CODE', 'can(language) is a coderef');
-  is (&$can('en'), 'en', 'can(language) call');
-}
-{
-  my $can = Time::Duration::Locale->can('nosuchfunctionnameexists');
+  my $can = Time::Duration::en_PIGLATIN->can('nosuchfunctionnameexists');
   is ($can, undef, 'can(nosuchfunctionnameexists) undef');
 }
 
-cmp_ok (duration(1), 'ne', '',
-        'duration(1)');
+is (duration(1), '1 econdsay', 'duration(1)');
 cmp_ok (duration(1,1), 'ne', '',
         'duration(1,1)');
 cmp_ok (duration_exact(1), 'ne', '',
         'duration(1)');
 
-cmp_ok (ago(1), 'ne', '',
-        'ago(1)');
+is (ago(2), '2 econdssay agoway', 'ago(2)');
 cmp_ok (ago(1,1), 'ne', '',
         'ago(1,1)');
 cmp_ok (ago_exact(1), 'ne', '',
@@ -98,15 +90,28 @@ cmp_ok (earlier_exact(1), 'ne', '',
 cmp_ok (concise(duration(123)), 'ne', '',
         'concise(duration(123))');
 
-
 #------------------------------------------------------------------------------
 # "No such function"
 
 {
-  my $ret = eval { Time::Duration::Locale::testnosuchfunction(); 1 };
+  my $ret = eval { Time::Duration::en_PIGLATIN::testnosuchfunction(); 1 };
   my $error = $@;
   ok (! $ret, 'testnosuchfunction() fails');
-  like ($error, '/No such function/', 'testnosuchfunction() error message');
+  like ($error, '/^No function testnosuchfunction exported by Time::Duration/',
+      'testnosuchfunction() error message');
 }
+
+#------------------------------------------------------------------------------
+# _filter()
+
+## no critic (ProtectPrivateSubs)
+is (Time::Duration::en_PIGLATIN::_filter('foo'),  'oofay');
+is (Time::Duration::en_PIGLATIN::_filter('Foo'),  'Oofay');
+is (Time::Duration::en_PIGLATIN::_filter('FOO'),  'OOFAY');
+is (Time::Duration::en_PIGLATIN::_filter('food'), 'oodfay');
+is (Time::Duration::en_PIGLATIN::_filter('I'),    'Iway');
+is (Time::Duration::en_PIGLATIN::_filter('quay'), 'ayquay');
+is (Time::Duration::en_PIGLATIN::_filter('qaar'), 'aarqay');
+
 
 exit 0;

@@ -17,6 +17,17 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+
+# Simply "use Time::Duration::Locale" instead of "use Time::Duration" and
+# the duration() etc functions follow your LANGUAGE.  Try
+#
+#     LANGUAGE=sv perl simple.pl
+#
+# Or if you don't have sv then the supplied silliness of
+#
+#     LANGUAGE=en_PIGLATIN perl simple.pl
+
+
 use strict;
 use warnings;
 use Time::Duration::Locale;

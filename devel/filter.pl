@@ -19,33 +19,22 @@
 
 use strict;
 use warnings;
-use lib 'lib';
-BEGIN {
-  $ENV{'LANGUAGE'} = 'en:sv';
-}
-use Time::Duration::Locale '-language_preferences_Glib';
+use File::Spec;
+use FindBin;
+use lib File::Spec->catdir($FindBin::RealBin,'lib');
+use Time::Duration::Upper;
 
+print "Upper ISA ",@Time::Duration::Upper::ISA,"\n";
+print "Upper AUTOLOAD ",
+  (defined &Time::Duration::Upper::AUTOLOAD ? "defined" : "not defined"), "\n";
+print "Upper AUTOLOAD ", \&Time::Duration::Upper::AUTOLOAD, "\n";
 
-# Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
+# use vars '$AUTOLOAD';
+# $AUTOLOAD = 'Time::Duration::Upper::duration';
+# Time::Duration::Upper::AUTOLOAD();
+#print Time::Duration::Upper::foo(45*86400+6*3600),"\n";
+
 print "main duration() is ",\&duration,"\n";
-{
-  require Time::Duration;
-  print "Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
-}
-
 print duration(45*86400+6*3600),"\n";
-
-$ENV{'LANGUAGE'} = 'la_PIG:it:sv';
-Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-
-print duration(150),"\n";
 
 exit 0;

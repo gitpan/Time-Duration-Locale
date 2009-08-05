@@ -19,33 +19,20 @@
 
 use strict;
 use warnings;
-use lib 'lib';
-BEGIN {
-  $ENV{'LANGUAGE'} = 'en:sv';
-}
-use Time::Duration::Locale '-language_preferences_Glib';
+use Time::Duration::en_PIGLATIN ();
+use Test::More tests => 8;
 
+SKIP: { eval 'use Test::NoWarnings; 1'
+          or skip 'Test::NoWarnings not available', 1; }
 
-# Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-print "main duration() is ",\&duration,"\n";
-{
-  require Time::Duration;
-  print "Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
-}
+ok (! defined &duration, 'duration() should not be imported');
+ok (! defined &ago,      'ago() should not be imported');
+ok (! defined &AUTOLOAD, 'AUTOLOAD() should not be imported');
+ok (! defined &can,      'can() should not be imported');
 
-print duration(45*86400+6*3600),"\n";
-
-$ENV{'LANGUAGE'} = 'la_PIG:it:sv';
-Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-
-print duration(150),"\n";
+is (Time::Duration::en_PIGLATIN::duration(1), '1 econdsay');
+my $subr = Time::Duration::en_PIGLATIN->can('ago');
+ok ($subr, 'can(ago)');
+is ($subr->(2), '2 econdssay agoway');
 
 exit 0;

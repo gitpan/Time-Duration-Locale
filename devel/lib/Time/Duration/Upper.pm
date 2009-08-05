@@ -1,5 +1,3 @@
-#!/usr/bin/perl
-
 # Copyright 2009 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
@@ -17,35 +15,25 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+# cf Lingua::FI::Kontti too
+
+package Time::Duration::Upper;
+use 5.005;
 use strict;
 use warnings;
-use lib 'lib';
-BEGIN {
-  $ENV{'LANGUAGE'} = 'en:sv';
-}
-use Time::Duration::Locale '-language_preferences_Glib';
+use Carp;
+use Time::Duration::Filter from => 'Time::Duration';
+use vars qw($VERSION);
 
+print "Upper AUTOLOAD func ", \&AUTOLOAD, "\n";
 
-# Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-print "main duration() is ",\&duration,"\n";
-{
-  require Time::Duration;
-  print "Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
+$VERSION = 2;
+
+sub _filter {
+  my ($str) = @_;
+  print "filter $str\n";
+  return uc($str);
 }
 
-print duration(45*86400+6*3600),"\n";
-
-$ENV{'LANGUAGE'} = 'la_PIG:it:sv';
-Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-
-print duration(150),"\n";
-
-exit 0;
+1;
+__END__

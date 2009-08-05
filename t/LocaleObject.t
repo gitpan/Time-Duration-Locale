@@ -25,7 +25,7 @@ use Test::More tests => 19;
 SKIP: { eval 'use Test::NoWarnings; 1'
           or skip 'Test::NoWarnings not available', 1; }
 
-my $want_version = 1;
+my $want_version = 2;
 cmp_ok ($Time::Duration::LocaleObject::VERSION, '>=', $want_version,
         'VERSION variable');
 cmp_ok (Time::Duration::LocaleObject->VERSION,  '>=', $want_version,

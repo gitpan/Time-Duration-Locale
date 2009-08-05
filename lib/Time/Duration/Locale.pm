@@ -23,7 +23,7 @@ use Carp;
 use Time::Duration::LocaleObject;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $AUTOLOAD);
 
-$VERSION = 1;
+$VERSION = 2;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -132,16 +132,11 @@ English module.
 
 Like C<Time::Duration>, the following functions are exported by default
 
-    later
-    later_exact
-    earlier
-    earlier_exact
-    ago
-    ago_exact
-    from_now
-    from_now_exact
-    duration
-    duration_exact
+    later     later_exact
+    earlier   earlier_exact
+    ago       ago_exact
+    from_now  from_now_exact
+    duration  duration_exact
     concise
 
 =head1 EXTRA FUNCTIONS
@@ -184,7 +179,7 @@ L<Time::Duration::sv>
 
 =head1 HOME PAGE
 
-L<http://user42.tuxfamily.org/time-duration-locale/index.html>
+http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
@@ -201,6 +196,6 @@ or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
 more details.
 
 You should have received a copy of the GNU General Public License along with
-Time-Duration-Locale.  If not, see L<http://www.gnu.org/licenses/>.
+Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 =cut
