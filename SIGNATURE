@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.55.
+signed via the Module::Signature module, version 0.61.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,17 +14,17 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 8624bcdae55baeef00cd11d5dfcfa60f68710a02 COPYING
-SHA1 d1f43faa258a292130c0c92c2c34d810fa7311c9 Changes
-SHA1 bbc936aafa3654fc67bb001c9c4efcd9a46cc045 MANIFEST
-SHA1 d950f2bc285437dc6166b615e2a22321416d4fd1 MANIFEST.SKIP
-SHA1 93aa8cd5fa800aa20958c24cf3ae71b5b7d36b67 META.yml
-SHA1 bc7efda3816b4fb9f9dd8b3ea9dc177bd44f71eb Makefile.PL
+SHA1 842745cb706f8f2126506f544492f7a80dbe29b3 COPYING
+SHA1 a46a8b793c67e448db27094c9db855d14340691f Changes
+SHA1 f0415a60064e15d7d214108fba69ce7e1f988eb2 MANIFEST
+SHA1 a5702ed4c66c943b47354756b340812302d15e6f MANIFEST.SKIP
+SHA1 8154d5ef7eff2cc998e45766aec831c03194b98d META.yml
+SHA1 73274d59b1f424b56d69ba9e9c89829ee47bc1b1 Makefile.PL
 SHA1 f0cde2291ac124ba0791d8ea29c268719a5a81ec README
-SHA1 a4a696ca3fee43a8165c969ac3a2bca246e04308 debian/changelog
+SHA1 7e9240597920d571a96f761400fad5f497c779c0 debian/changelog
 SHA1 ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 debian/compat
-SHA1 25aab87c588dbbddb6ec2d76424908e110039ae1 debian/control
-SHA1 df292ad5f885a99bf136118aede8283861910136 debian/copyright
+SHA1 f730cd0ba5bcb687f41d55dba3dba7d456e7d1d4 debian/control
+SHA1 aa4e7ee0770e88617e0cc8f0660fa227b47e133c debian/copyright
 SHA1 cdbce099f4915aabbd7dd379e63f2e34a7ccbffb debian/rules
 SHA1 b5fe4a58fb500050deff80a3a3541ae0b53e96e1 debian/watch
 SHA1 e989bbb790775adb1b932c13039fe9326131b1ea devel/exported-autoload.pl
@@ -36,24 +36,27 @@ SHA1 3a24dd16c2a53534c223d270d548d3599c77bfea devel/pig.pl
 SHA1 8ae04d60c1c32f3ab27010b651cd216d12c0a875 devel/run-obj.pl
 SHA1 e6ad21dc075ea79cded9d06fb52048d2ec8bff6f devel/run.pl
 SHA1 0f7b97ca40af74abaa3e45b056d952a590000d5e examples/simple.pl
-SHA1 857ad3765aff183a0b0e4e784526e56c2b366531 inc/MyMakeMakerExtras.pm
-SHA1 352a1eaaf6990eabfe69fa844dcf11da62041a6c lib/Time/Duration/Filter.pm
-SHA1 735d88201120856809f0247ee031df26fb34ead2 lib/Time/Duration/Locale.pm
-SHA1 d504e337c4f8b61383477bc74a3afb82021da6f7 lib/Time/Duration/LocaleObject.pm
-SHA1 1c48afc3d2f7764d84a511cd0a58663490e7f178 lib/Time/Duration/en_PIGLATIN.pm
-SHA1 4351c3885de5689729bfeda126cd22dfe7b21260 t/0-META-read.t
+SHA1 04b47938da4980ca0da3d5560d7826ef3139e861 inc/MyMakeMakerExtras.pm
+SHA1 005d753dd1cb67538ded07931423b2e7cd1e25b3 inc/my_pod2html
+SHA1 462477ebf7ff542083b21ab770674180d76bd451 lib/Time/Duration/Filter.pm
+SHA1 01d7de99a701077151bd45be32a280474dfc7193 lib/Time/Duration/Locale.pm
+SHA1 0965a0dc25b41ee399cda494e405cf16e7407a6f lib/Time/Duration/LocaleObject.pm
+SHA1 ce539ddf210e9898320110c8e686420e2c406bee lib/Time/Duration/en_PIGLATIN.pm
+SHA1 378b932305fb60823467c2af3c771fe3fc295a13 t/0-META-read.t
 SHA1 a343ed4dce96d05de51eed1ec065911584b96fce t/0-Test-DistManifest.t
 SHA1 bba0dc087cbe64d8f100ab77e6cef061c0bebf27 t/0-Test-Pod.t
+SHA1 39fb4f79da7687abc825c4ea646acb3ee9e3a342 t/0-Test-YAML-Meta.t
+SHA1 2608061c9779925dd862f9c8d08f846fb7a7b02e t/1-Test-Synopsis.t
 SHA1 75351464013780065b2e704270481a51835b200e t/Locale-noimport.t
-SHA1 516c87b24aad05d02d47df591c1293adde539af0 t/Locale.t
-SHA1 eb4bcaa29f54fabe2a3c7d6c8012fbdb75658cd1 t/LocaleObject-ithreads.t
-SHA1 a78f1c5b79f25a3d22ac46b6fbc3321b14a1fb93 t/LocaleObject.t
+SHA1 532f11b0390355afa353ff9c9a37d9f51a51dfce t/Locale.t
+SHA1 3dca5fde7367f517dd39b41aea345fb0141aa055 t/LocaleObject-ithreads.t
+SHA1 06b0d712d8bb6bdbfc9e3dbdc47220120eb3f860 t/LocaleObject.t
 SHA1 b696eb505d2dcaab7d4d3a596d253ed4b324f86d t/en_PIGLATIN-noimport.t
-SHA1 fb84c2c03a3cee24d635b04ef360ce331f97282f t/en_PIGLATIN.t
+SHA1 9ff6061c9fbc6c516425d5b5b0b5a366b147a2b5 t/en_PIGLATIN.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.9 (GNU/Linux)
+Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFKegUSLFMCIV9q3ToRAnXuAKC6v1meoMQUiW8NqYa0IEqhdyNkFQCfSss7
-LNm7RQzOqf5zpQGxk3bDTE4=
-=Fyd0
+iD8DBQFLXNL3LFMCIV9q3ToRAnZzAKCPMyUaef4chiwhntpGoSXpQerpiACdHVd4
+7Pl8TXXXnRD+uAuMvgzTK68=
+=nBzB
 -----END PGP SIGNATURE-----

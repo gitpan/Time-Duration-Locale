@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -25,11 +25,11 @@ use Test::More tests => 34;
 SKIP: { eval 'use Test::NoWarnings; 1'
           or skip 'Test::NoWarnings not available', 1; }
 
-my $want_version = 2;
-cmp_ok ($Time::Duration::en_PIGLATIN::VERSION, '>=', $want_version,
-        'VERSION variable');
-cmp_ok (Time::Duration::en_PIGLATIN->VERSION,  '>=', $want_version,
-        'VERSION class method');
+my $want_version = 3;
+is ($Time::Duration::en_PIGLATIN::VERSION, $want_version,
+    'VERSION variable');
+is (Time::Duration::en_PIGLATIN->VERSION, $want_version,
+    'VERSION class method');
 { ok (eval { Time::Duration::en_PIGLATIN->VERSION($want_version); 1 },
       "VERSION class check $want_version");
   my $check_version = $want_version + 1000;

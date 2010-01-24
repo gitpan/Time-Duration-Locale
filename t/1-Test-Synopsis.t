@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -17,37 +17,24 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+
+## no critic (ProhibitCallsToUndeclaredSubs)
+
 use strict;
 use warnings;
-use Time::Duration::LocaleObject;
 use Test::More;
 
-use Config;
-$Config{useithreads}
-  or plan skip_all => 'No ithreads in this Perl';
+eval 'use Test::Synopsis; 1'
+  or plan skip_all => "due to Test::Synopsis not available -- $@";
 
-eval { require threads } # new in perl 5.8, maybe
-  or plan skip_all => "threads.pm not available: $@";
+plan tests => 3;
 
-plan tests => 2;
+# exclude lib/Time/Duration/Filter.pm as its synopsis code depends on
+# Time::Duration::sv
+#
+synopsis_ok('lib/Time/Duration/Locale.pm');
+synopsis_ok('lib/Time/Duration/LocaleObject.pm');
+synopsis_ok('lib/Time/Duration/en_PIGLATIN.pm');
 
-SKIP: { eval 'use Test::NoWarnings; 1'
-          or skip 'Test::NoWarnings not available', 1; }
-
-
-# This is only meant to check that any CLONE() done by threads works with
-# the AUTOLOAD() and/or can() stuff.
-
-$ENV{'LANGUAGE'} = 'en';
-my $tdl = Time::Duration::LocaleObject->new;
-$tdl->setlocale;
-
-my $thr = threads->create(\&foo);
-sub foo {
-  return $tdl->ago(0);
-}
-
-my @ret = $thr->join;
-is_deeply (\@ret, [$tdl->ago(0)], 'same in thread as main');
 
 exit 0;
