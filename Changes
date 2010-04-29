@@ -17,6 +17,9 @@ with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
+Version 4, April 2010
+    - cross reference Time::Duration::pt too
+
 Version 3, January 2010
     - test script watch out for threads.pm not available
 

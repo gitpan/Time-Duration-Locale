@@ -24,7 +24,7 @@ use warnings;
 use Time::Duration::Filter;  #  from => 'Time::Duration';
 
 use vars '$VERSION';
-$VERSION = 3;
+$VERSION = 4;
 
 sub _filter {
   my ($str) = @_;
@@ -58,8 +58,7 @@ sub _follow_caps {
 }
 
 # Text::Bastardize 0.08 has a bug where pig() goes into an infinite loop on
-# a word with no vowels like a number "20" or whatever from Time::Duration
-# ...
+# a word with no vowels like a number "20" etc from Time::Duration ...
 #
 # use Text::Bastardize;
 # my $bastardizer = Text::Bastardize->new;
@@ -72,7 +71,7 @@ sub _follow_caps {
 # use Time::Duration ();
 # use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 # 
-# $VERSION = 3;
+# $VERSION = 4;
 # 
 # use Exporter;
 # @ISA = ('Exporter');
@@ -96,7 +95,7 @@ Time::Duration::en_PIGLATIN - fun pig Latin time durations
 
  use Time::Duration::en_PIGLATIN;
  print "next update ",duration(150),"\n";
-   # prints "2 inutesmay andway 30 econdssay"
+  # prints "2 inutesmay andway 30 econdssay"
 
 =head1 DESCRIPTION
 

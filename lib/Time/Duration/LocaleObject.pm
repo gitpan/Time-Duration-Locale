@@ -27,9 +27,10 @@ use Class::Singleton;
 @ISA = ('Class::Singleton');
 *_new_instance = \&new;
 
-$VERSION = 3;
+$VERSION = 4;
 
-use constant DEBUG => 0;
+# uncomment this to run the ### lines
+#use Smart::Comments;
 
 sub new {
   my ($class, %self) = @_;
@@ -118,7 +119,7 @@ sub language_preferences {
   return $class_or_self->$method;
 }
 sub language_preferences_Glib {
-  if (DEBUG) { print "language_preferences_Glib()\n"; }
+  ### language_preferences_Glib()
   require Glib;
   return Glib::get_language_names();
 }
@@ -150,7 +151,7 @@ sub language_preferences_ENV {
 sub setlocale {
   my ($self) = @_;
   ref $self or $self = $self->instance;
-  if (DEBUG) { print "TDLObj setlocale()\n"; }
+  ### TDLObj setlocale()
 
   my @langs = $self->language_preferences;
 
@@ -163,7 +164,7 @@ sub setlocale {
   # default to plain 'Time::Duration'
   push @langs, 'en';
 
-  if (DEBUG) { print "  try langs: ",join(',',@langs),"\n"; }
+  ### try langs: @langs
 
   my %seen;
   my $error;
@@ -174,22 +175,35 @@ sub setlocale {
       return $lang;
     }
     $error = $@;
-    if (DEBUG) { print "  $lang - error $error\n"; }
+    ### $lang
+    ### $error
   }
   croak "Time::Duration not available -- $error";
 }
 
 #------------------------------------------------------------------------------
 # call-through
+#
+# ENHANCE-ME: Umm, like all AUTOLOAD for class methods this is slightly
+# dangerous.  If the base Class::Singleton already has a method the same
+# name as the Time::Duration function/method which is supposed to be created
+# here then the AUTOLOAD here doesn't run.  Example in
+# devel/autoload-singleton.pl.
+#
+# Should be ok in practice.  The trick would be to stub up funcs for the
+# possible methods in the target module, except that's not done immediately
+# in new(), and later is too late.  Maybe it'd be worth explicit stubs for
+# the normal Time::Duration funcs at least ...
+#
 
 sub can {
   my ($self, $name) = @_;
-  if (DEBUG) { print "TDLObj can $name\n"; }
+  ### print "TDLObj can(): $name
   return $self->SUPER::can($name) || _make_dispatcher($self,$name);
 }
 sub AUTOLOAD {
   my $name = $AUTOLOAD;
-  if (DEBUG) { print "TDLObj autoload $name\n"; }
+  ### TDLObj AUTOLOAD(): $name
   $name =~ s/.*://;
   my $code = _make_dispatcher($_[0],$name)
     || croak "No such function $name()";
@@ -199,7 +213,7 @@ sub AUTOLOAD {
 use vars '$_make_dispatcher';
 sub _make_dispatcher {
   my ($class_or_self, $name) = @_;
-  if (DEBUG) { print "TDLObj _make_dispatcher $class_or_self $name\n"; }
+  ### TDLObj _make_dispatcher(): $class_or_self, $name
 
   # $_make_dispatcher is recursion protection against bad
   # language_preferences method, or any other undefined method module() or
@@ -209,13 +223,14 @@ sub _make_dispatcher {
         local $_make_dispatcher = 1;
         $class_or_self->module || $class_or_self->setlocale;
         my $module = $class_or_self->module;
-        if (DEBUG) { print "  check target $module\n"; }
+        ### module exists: $module
+        ### check can(): $name
         ! $module->can($name) }) {
     return undef;
   }
 
   my $subr = sub {
-    if (DEBUG >= 2) { print "TDLObj->$name dispatch\n"; }
+    #### TDLObj dispatch: $name
 
     my $self = shift;
     ref $self or $self = $self->instance;
@@ -368,7 +383,7 @@ if this is worth the trouble.
 =head1 SEE ALSO
 
 L<Time::Duration::Locale>, L<Time::Duration>, L<Time::Duration::ja>
-L<Time::Duration::sv>
+L<Time::Duration::pt>, L<Time::Duration::sv>
 
 =head1 HOME PAGE
 

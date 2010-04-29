@@ -15,8 +15,6 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
-# cf Lingua::FI::Kontti too
-
 package Time::Duration::Filter;
 use 5.005;
 use strict;
@@ -26,9 +24,10 @@ use Carp;
 use Module::Load;
 use vars qw($VERSION $AUTOLOAD);
 
-use constant DEBUG => 0;
+# uncomment this to run the ### lines
+#use Smart::Comments;
 
-$VERSION = 3;
+$VERSION = 4;
 
 my @_target_ISA = ('Exporter');
 
@@ -37,22 +36,23 @@ sub import {
   setup (scalar caller(), @_);
 }
 sub setup {
-  my ($pack, %options) = @_;
+  my ($package, %options) = @_;
   my $from = $options{'from'} || 'Time::Duration';
   Module::Load::load ($from);
 
-  if (DEBUG) { print "setup $pack from $from\n"; }
+  ### setup: $package
+  ### $from
   no strict;
-  *{"${pack}::AUTOLOAD"}    = \&_target_AUTOLOAD;
-  *{"${pack}::can"}         = \&_target_can;
-  ${"${pack}::_from"}       = $from;
+  *{"${package}::AUTOLOAD"}    = \&_target_AUTOLOAD;
+  *{"${package}::can"}         = \&_target_can;
+  ${"${package}::_from"}       = $from;
 
   require Exporter;
-  *{"${pack}::ISA"}         = \@_target_ISA;
+  *{"${package}::ISA"}         = \@_target_ISA;
   # same as the $from package
-  *{"${pack}::EXPORT"}      = \@{"${from}::EXPORT"};
-  *{"${pack}::EXPORT_OK"}   = \@{"${from}::EXPORT_OK"};
-  *{"${pack}::EXPORT_TAGS"} = \@{"${from}::EXPORT_TAGS"};
+  *{"${package}::EXPORT"}      = \@{"${from}::EXPORT"};
+  *{"${package}::EXPORT_OK"}   = \@{"${from}::EXPORT_OK"};
+  *{"${package}::EXPORT_TAGS"} = \@{"${from}::EXPORT_TAGS"};
 }
 
 sub _target_can {
@@ -60,7 +60,7 @@ sub _target_can {
   return ($class->SUPER::can($name) || _make_func ($class, $name));
 }
 sub _target_AUTOLOAD {
-  if (DEBUG) { print "T:D:F AUTOLOAD of $AUTOLOAD\n"; }
+  ### TDF AUTOLOAD of: $AUTOLOAD
   my ($package, $name) = ($AUTOLOAD =~ /(.*)::(.*)/);
   my $subr = _make_func ($package, $name)
     || die "No function $name exported by " . ${"${package}::_from"};
@@ -76,8 +76,8 @@ sub _make_func {
   my $from = ${"${package}::_from"};
   my $from_func = "${from}::$name";
   my $filter_func = "${package}::_filter";
-  if (DEBUG) { print "  from   $from_func\n";
-               print "  filter $filter_func\n"; }
+  ### from: $from_func
+  ### filter: $filter_func
 
   my $subr = sub { &$filter_func (&$from_func (@_)) };
   *{"${package}::$name"} = $subr;
@@ -113,8 +113,8 @@ Time::Duration::Filter - fun filtering of Time::Duration strings
 B<This is an experiment, don't use it yet!>
 
 C<Time::Duration::Filter> sets up a new package with exports and functions
-compatible with C<Time::Duration> and which work by filtering the output of
-a given C<Time::Duration> or language-specific package.
+compatible with C<Time::Duration> and which all work by filtering the output
+of C<Time::Duration> or a given language-specific package.
 
 =head1 SEE ALSO
 

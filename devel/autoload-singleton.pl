@@ -1,6 +1,6 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -19,33 +19,15 @@
 
 use strict;
 use warnings;
-use lib 'lib';
-BEGIN {
-  $ENV{'LANGUAGE'} = 'pt:en:sv';
-}
-use Time::Duration::Locale '-language_preferences_Glib';
 
-
-# Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-print "main duration() is ",\&duration,"\n";
-{
-  require Time::Duration;
-  print "Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
+use Class::Singleton;
+sub Class::Singleton::duration {
+  print "oops, this is Class::Singleton::duration\n";
+  return 0;
 }
 
-print duration(45*86400+6*3600),"\n";
-
-$ENV{'LANGUAGE'} = 'la_PIG:it:sv';
-Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
-
-print duration(150),"\n";
-
+require Time::Duration::LocaleObject;
+my $tdl = Time::Duration::LocaleObject->new;
+print "next update: ", $tdl->duration(120) ,"\n";
+print "next update exact: ", $tdl->duration_exact(121.5) ,"\n";
 exit 0;

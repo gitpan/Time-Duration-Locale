@@ -1,4 +1,4 @@
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -25,7 +25,13 @@ use Exporter;
 @ISA = ('Exporter');
 @EXPORT = qw(can AUTOLOAD);
 
-use constant DEBUG => 0;
+# uncomment this to run the ### lines
+#use Smart::Comments;
+
+
+# stub generation to hit right method when subclassing ?
+
+
 
 # subclassing Exporter
 sub export {
@@ -48,11 +54,9 @@ sub can {
 #
 sub AUTOLOAD {
   my ($origin_module, $funcname) = ($AUTOLOAD =~ /(.*)::([^:]+)$/);
-  if (DEBUG) {
-    my $target_module = $origin_module->_module_dynamicdelegate;
-    print "DynamicDelegate $AUTOLOAD, dispatch to ",
-      (defined $target_module ? "'$target_module'" : 'undef'), "\n";
-  }
+  ### DynamicDelegate: $AUTOLOAD
+  ### dispatch to: $origin_module->_module_dynamicdelegate
+
   goto (_lookup($origin_module,$funcname));
 }
 

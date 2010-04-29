@@ -18,8 +18,6 @@
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 
-## no critic (ProhibitCallsToUndeclaredSubs)
-
 use strict;
 use warnings;
 use Test::More;
@@ -27,14 +25,15 @@ use Test::More;
 eval 'use Test::Synopsis; 1'
   or plan skip_all => "due to Test::Synopsis not available -- $@";
 
-plan tests => 3;
+my $manifest = ExtUtils::Manifest::maniread();
+my @files = grep m{^lib/.*\.pm$}, keys %$manifest;
 
-# exclude lib/Time/Duration/Filter.pm as its synopsis code depends on
-# Time::Duration::sv
-#
-synopsis_ok('lib/Time/Duration/Locale.pm');
-synopsis_ok('lib/Time/Duration/LocaleObject.pm');
-synopsis_ok('lib/Time/Duration/en_PIGLATIN.pm');
+if (! eval { require Time::Duration::sv }) {
+  diag "skip Time::Duration::Filter since Time::Duration::sv not available -- $@";
+  @files = grep {! m{/Time/Duration/Filter.pm} } @files;
+}
 
+plan tests => 1 * scalar @files;
 
+Test::Synopsis::synopsis_ok(@files);
 exit 0;

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -17,35 +17,28 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+
+# Exporter::Renaming 1.18 doesn't like modules with export_to_level().
+
 use strict;
 use warnings;
-use lib 'lib';
-BEGIN {
-  $ENV{'LANGUAGE'} = 'pt:en:sv';
-}
-use Time::Duration::Locale '-language_preferences_Glib';
+use Exporter::Renaming;
+
+BEGIN { $ENV{'LANGUAGE'} = 'en_PIGLATIN' }
+use Time::Duration::Locale Renaming => [ duration => 'my_duration' ];
 
 
-# Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
-}
+require Time::Duration::LocaleObject;
+print Time::Duration::LocaleObject::language_preferences_ENV(),"\n";
+
 print "main duration() is ",\&duration,"\n";
-{
-  require Time::Duration;
-  print "Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
+print "main my_duration() is ",\&my_duration,"\n";
+if (defined &duration) {
+  print duration(45*86400+6*3600),"\n";
+  print duration(150),"\n";
 }
-
-print duration(45*86400+6*3600),"\n";
-
-$ENV{'LANGUAGE'} = 'la_PIG:it:sv';
-Time::Duration::Locale::setlocale();
-{
-  my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
+if (defined &my_duration) {
+  print my_duration(45*86400+6*3600),"\n";
+  print my_duration(150),"\n";
 }
-
-print duration(150),"\n";
-
 exit 0;

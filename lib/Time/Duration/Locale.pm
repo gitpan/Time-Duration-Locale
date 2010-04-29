@@ -23,7 +23,7 @@ use Carp;
 use Time::Duration::LocaleObject;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $AUTOLOAD);
 
-$VERSION = 3;
+$VERSION = 4;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -36,7 +36,8 @@ use Exporter;
 @EXPORT_OK = ('interval', @EXPORT);
 %EXPORT_TAGS = (all => \@EXPORT_OK);
 
-use constant DEBUG => 0;
+# uncomment this to run the ### lines
+#use Smart::Comments;
 
 # subclassing Exporter
 sub import {
@@ -69,12 +70,12 @@ sub import {
 #
 sub can {
   my ($class, $name) = @_;
-  if (DEBUG) { print "TDL can $name\n"; }
+  ### TDL can(): $name
   return $class->SUPER::can($name) || _make_dispatcher($name);
 }
 sub AUTOLOAD {
   my $name = $AUTOLOAD;
-  if (DEBUG) { print "TDL autoload $name\n"; }
+  ### TDL AUTOLOAD(): $name
   $name =~ s/.*://;
   my $code = _make_dispatcher($name)
     || croak "No such function $name()";
@@ -94,7 +95,7 @@ sub _make_dispatcher {
   my ($name) = @_;
   Time::Duration::LocaleObject->can($name) or return undef;
   my $subr = sub {
-    if (DEBUG >= 2) { print "TDL dispatch to TDLObj->$name\n"; }
+    #### TDL dispatch to TDLObj method: $name
     return Time::Duration::LocaleObject->$name (@_);
   };
   { no strict 'refs'; *$name = $subr }
@@ -119,10 +120,11 @@ C<Time::Duration::Locale> has the same interface as
 L<C<Time::Duration>|Time::Duration> but chooses a language according to the
 user's locale settings.
 
-As of June 2009 the available language modules on CPAN include
+As of April 2010 the available language modules on CPAN include
 
     Time::Duration        English
     Time::Duration::ja    Japanese
+    Time::Duration::pt    Portuguese
     Time::Duration::sv    Swedish
 
 If the user's locale setting is not one of these then the fallback is the
@@ -175,7 +177,7 @@ loaded.
 =head1 SEE ALSO
 
 L<Time::Duration::LocaleObject>, L<Time::Duration>, L<Time::Duration::ja>
-L<Time::Duration::sv>
+L<Time::Duration::pt>, L<Time::Duration::sv>
 
 =head1 HOME PAGE
 

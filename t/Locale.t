@@ -25,7 +25,7 @@ use Test::More tests => 30;
 SKIP: { eval 'use Test::NoWarnings; 1'
           or skip 'Test::NoWarnings not available', 1; }
 
-my $want_version = 3;
+my $want_version = 4;
 is ($Time::Duration::Locale::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::Locale->VERSION,  $want_version,

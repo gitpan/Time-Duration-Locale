@@ -1,4 +1,4 @@
-# Copyright 2008, 2009 Kevin Ryde
+# Copyright 2008, 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -25,13 +25,14 @@ Section: perl
 Priority: optional
 Build-Depends: cdbs, debhelper (>= 5)
 Maintainer: Kevin Ryde <user42@zip.com.au>
-Standards-Version: 3.8.3
+Standards-Version: 3.8.4
 Homepage: http://user42.tuxfamily.org/time-duration-locale/index.html
 Bugs: mailto:user42@zip.com.au
 
 Package: libtime-duration-locale-perl
 Architecture: all
-Depends: perl, ${misc:Depends}
+Depends: perl, ${perl:Depends}, ${misc:Depends}
+Suggests: libtime-duration-ja-perl, libtime-duration-pt-perl, libtime-duration-sv-perl
 Description: Time::Duration from locale settings
  Time::Duration::Locale selects a language-specific sub-module of
  Time::Duration according to the user's locale settings or a
