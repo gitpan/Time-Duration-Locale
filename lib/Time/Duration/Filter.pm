@@ -16,7 +16,7 @@
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 package Time::Duration::Filter;
-use 5.005;
+use 5.004;
 use strict;
 no strict 'refs';
 use warnings;
@@ -27,7 +27,7 @@ use vars qw($VERSION $AUTOLOAD);
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-$VERSION = 4;
+$VERSION = 6;
 
 my @_target_ISA = ('Exporter');
 
@@ -95,6 +95,8 @@ sub _make_func {
 1;
 __END__
 
+=for stopwords Ryde
+
 =head1 NAME
 
 Time::Duration::Filter - fun filtering of Time::Duration strings
@@ -110,7 +112,8 @@ Time::Duration::Filter - fun filtering of Time::Duration strings
 
 =head1 DESCRIPTION
 
-B<This is an experiment, don't use it yet!>
+This is an experiment, it's not really meant for use yet, though it works as
+far as it goes.
 
 C<Time::Duration::Filter> sets up a new package with exports and functions
 compatible with C<Time::Duration> and which all work by filtering the output

@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -17,6 +17,7 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+use 5.004;
 use strict;
 use warnings;
 use Time::Duration::en_PIGLATIN ();

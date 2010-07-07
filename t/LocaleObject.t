@@ -17,15 +17,18 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+use 5.004;
 use strict;
 use warnings;
 use Time::Duration::LocaleObject;
-use Test::More tests => 19;
+use Test::More tests => 25;
 
-SKIP: { eval 'use Test::NoWarnings; 1'
-          or skip 'Test::NoWarnings not available', 1; }
+BEGIN {
+ SKIP: { eval 'use Test::NoWarnings; 1'
+           or skip 'Test::NoWarnings not available', 1; }
+}
 
-my $want_version = 4;
+my $want_version = 6;
 is ($Time::Duration::LocaleObject::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::LocaleObject->VERSION,  $want_version,
@@ -45,39 +48,61 @@ is (Time::Duration::LocaleObject->VERSION,  $want_version,
       "VERSION object check $check_version");
 }
 
+#------------------------------------------------------------------------------
+# class
+
 cmp_ok (Time::Duration::LocaleObject->duration(1), 'ne', '',
         'Time::Duration::LocaleObject->duration(1)');
 
-my $tdl = Time::Duration::LocaleObject->new;
-is ($tdl->module,   undef, 'module() initially undef');
-is ($tdl->language, undef, 'language() initially undef');
-
-cmp_ok ($tdl->duration(1), 'ne', '', 'tdlobj->duration(1)');
-
-isnt ($tdl->module,   undef, 'module() resolved to non-undef');
-isnt ($tdl->language, undef, 'language() resolved to non-undef');
+#------------------------------------------------------------------------------
+# instance
 
 {
-  my $coderef = Time::Duration::LocaleObject->can('duration');
-  cmp_ok ($tdl->$coderef(1), 'ne', '', 'tdlobj->durationcoderef(1)');
-}
-{
-  my $can = Time::Duration::LocaleObject->can('nosuchfunctionnameexists');
-  is ($can, undef, 'can(nosuchfunctionnameexists) undef');
+  my $tdl = Time::Duration::LocaleObject->new;
+  is ($tdl->module,   undef, 'module() initially undef');
+  is ($tdl->language, undef, 'language() initially undef');
+
+  cmp_ok ($tdl->duration(1), 'ne', '', 'tdlobj->duration(1)');
+
+  isnt ($tdl->module,   undef, 'module() resolved to non-undef');
+  isnt ($tdl->language, undef, 'language() resolved to non-undef');
+
+  {
+    my $coderef = Time::Duration::LocaleObject->can('duration');
+    cmp_ok ($tdl->$coderef(1), 'ne', '', 'tdlobj->durationcoderef(1)');
+  }
+  {
+    my $can = Time::Duration::LocaleObject->can('nosuchfunctionnameexists');
+    is ($can, undef, 'can(nosuchfunctionnameexists) undef');
+  }
+
+  {
+    my $ret = eval {
+      $tdl->module('Time::Duration::LocaleObject::TestWhenNoSuchModule');
+      1 };
+    ok (! $ret, 'TestWhenNoSuchModule eval fails');
+    cmp_ok ($tdl->duration(1), 'ne', '',
+            'duration() still ok after TestWhenNoSuchModule');
+  }
 }
 
-{
-  my $ret = eval {
-    $tdl->module('Time::Duration::LocaleObject::TestWhenNoSuchModule');
-    1 };
-  ok (! $ret, 'TestWhenNoSuchModule eval fails');
-  cmp_ok ($tdl->duration(1), 'ne', '',
-          'duration() still ok after TestWhenNoSuchModule');
+foreach my $norecurse_module ('Time::Duration::Locale',
+                              'Time::Duration::LocaleObject') {
+  use_ok ($norecurse_module);
+  my $got = eval { Time::Duration::LocaleObject->new (module => $norecurse_module); 1 };
+  my $err = $@;
+  ok (! $got, "refuse recursive module $norecurse_module");
+  like ($err, '/Locale or LocaleObject/',
+        "error message for $norecurse_module");
 }
+
 
 #------------------------------------------------------------------------------
 # language()
 
-is ($tdl->language('en'), 'en', 'set language(en)');
+{
+  my $tdl = Time::Duration::LocaleObject->new;
+  is ($tdl->language('en'), 'en', 'set language(en)');
+}
 
 exit 0;

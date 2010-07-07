@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 # Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
@@ -15,24 +17,28 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
-
-package Time::Duration::Upper;
-use 5.004;
 use strict;
 use warnings;
-use Carp;
-use Time::Duration::Filter from => 'Time::Duration';
-use vars qw($VERSION);
-
-print "Upper AUTOLOAD func ", \&AUTOLOAD, "\n";
-
-$VERSION = 2;
-
-sub _filter {
-  my ($str) = @_;
-  print "filter $str\n";
-  return uc($str);
+use lib 'lib';
+BEGIN {
+  $ENV{'LANGUAGE'} = 'en_PIGLATIN:fr:pt_PT:en:sv';
 }
+use Time::Duration::Locale;
 
-1;
-__END__
+
+use I18N::LangTags;
+use I18N::LangTags::Detect;
+
+my @langs = I18N::LangTags::Detect::detect();
+$, = "\n";
+print @langs,'','';
+
+@langs = I18N::LangTags::implicate_supers(@langs);
+$, = "\n";
+print @langs,'','';
+
+@langs = I18N::LangTags::implicate_supers(qw(pt-br de-DE en-US fr pt-br-janeiro));
+@langs = I18N::LangTags::implicate_supers_strictly(qw(pt-br de-DE en-US fr pt-br-janeiro));
+@langs = I18N::LangTags::implicate_supers(qw(en-gb en-au));
+$, = "\n";
+print @langs,'','';

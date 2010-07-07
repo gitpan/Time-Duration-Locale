@@ -18,17 +18,18 @@
 # cf Lingua::FI::Kontti too
 
 package Time::Duration::en_PIGLATIN;
-use 5.005;
+use 5.004;
 use strict;
 use warnings;
 use Time::Duration::Filter;  #  from => 'Time::Duration';
 
 use vars '$VERSION';
-$VERSION = 4;
+$VERSION = 6;
 
 sub _filter {
   my ($str) = @_;
-  # Could do something on apostrophe in the middle of a word, but that
+
+  # Could do something for apostrophe in the middle of a word, but that
   # doesn't arise from Time::Duration.
   $str =~ s{([[:alpha:]]+)}{
     my $word = $1;
@@ -71,7 +72,7 @@ sub _follow_caps {
 # use Time::Duration ();
 # use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 # 
-# $VERSION = 4;
+# $VERSION = 6;
 # 
 # use Exporter;
 # @ISA = ('Exporter');
@@ -86,6 +87,8 @@ sub _follow_caps {
 
 1;
 __END__
+
+=for stopwords igpay Atinlay Ryde
 
 =head1 NAME
 

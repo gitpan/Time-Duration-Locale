@@ -16,14 +16,14 @@
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 package Time::Duration::Locale;
-use 5.005;
+use 5.004;
 use strict;
 use warnings;
 use Carp;
 use Time::Duration::LocaleObject;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $AUTOLOAD);
 
-$VERSION = 4;
+$VERSION = 6;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -39,20 +39,6 @@ use Exporter;
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-# subclassing Exporter
-sub import {
-  my $class = shift;
-
-  # experimental undocumented '-language_preferences_ENV' or
-  # '-language_preferences_Glib'
-  if (@_ && $_[0] =~ /^-(.*)/) {
-    Time::Duration::LocaleObject->languages_method ($1);
-    shift;
-  }
-
-  return $class->SUPER::export_to_level (1, @_);
-}
-
 # SUPER::can() here is UNIVERSAL::can().  When an autoloaded function like
 # duration() is exported, UNIVERSAL::can() returns the stub coderef which
 # calls to AUTOLOAD.  This means AUTOLOAD() can't rely on can() to get the
@@ -61,7 +47,7 @@ sub import {
 #
 # If $name exists as a method in Time::Duration::LocaleObject, meaning a
 # function in Time::Duration or langugage-specifc module, then create *$name
-# so as to have just one copy of it for can() to return each time and so as
+# so as to have just one copy of which can() will return each time and so as
 # not to go through AUTOLOAD() every time.
 #
 # If $name is unknown then don't create a dispatcher, firstly of course so
@@ -77,19 +63,18 @@ sub AUTOLOAD {
   my $name = $AUTOLOAD;
   ### TDL AUTOLOAD(): $name
   $name =~ s/.*://;
-  my $code = _make_dispatcher($name)
-    || croak "No such function $name()";
+  my $code = _make_dispatcher($name) || croak "No such function $name()";
   goto $code;
 }
 
-# The sub here is "by name".  Could instead go to the coderef returned by
-# can(), like
+# The method call to Time::Duration::LocaleObject here is "by name".  Could
+# instead go to the coderef returned by can(), like
 #
 #   sub { unshift @_, 'Time::Duration::LocaleObject'; goto $can; };
 #
 # Dunno if there's more merit in the name or the coderef.  The name would
-# support redefinitions (the base TDLObj->can() returns the same subr every
-# time).  The coderef might save a couple of cycles.
+# support redefinitions (though the base TDLObj->can() returns the same subr
+# every time).  The coderef might save a couple of cycles.
 #
 sub _make_dispatcher {
   my ($name) = @_;
@@ -105,9 +90,11 @@ sub _make_dispatcher {
 1;
 __END__
 
+=for stopwords CPAN ja Ryde
+
 =head1 NAME
 
-Time::Duration::Locale - time duration module chosen by locale
+Time::Duration::Locale - time duration string chosen by user's language preferences
 
 =head1 SYNOPSIS
 
@@ -116,13 +103,13 @@ Time::Duration::Locale - time duration module chosen by locale
 
 =head1 DESCRIPTION
 
-C<Time::Duration::Locale> has the same interface as
-L<C<Time::Duration>|Time::Duration> but chooses a language according to the
-user's locale settings.
+C<Time::Duration::Locale> has the same interface as C<Time::Duration> but
+chooses a language according to the user's locale settings.
 
-As of April 2010 the available language modules on CPAN include
+As of July 2010 available language modules on CPAN include
 
     Time::Duration        English
+    Time::Duration::fr    French
     Time::Duration::ja    Japanese
     Time::Duration::pt    Portuguese
     Time::Duration::sv    Swedish
@@ -150,17 +137,18 @@ are not exported.
 
 =item C<Time::Duration::Locale::setlocale ()>
 
-Set the language from the current locale environment variables etc.
+Set the language from the current locale environment variables etc.  The
+current implementation uses C<I18N::LangTags::Detect>.
 
-This is called automatically the first time one of the duration functions is
-called.  Call it explicitly if you change the environment variables later
-and want C<Time::Duration::Locale> to follow the new values.
+This is done automatically the first time one of the duration functions is
+called.  But call it explicitly if you change the environment variables etc
+later and want C<Time::Duration::Locale> to follow the new values.
 
 =item C<$lang = Time::Duration::Locale::language ()>
 
-=item C<Time::Duration::Locale::language ($lang)>
-
 =item C<$module = Time::Duration::Locale::module ()>
+
+=item C<Time::Duration::Locale::language ($lang)>
 
 =item C<Time::Duration::Locale::module ($module)>
 
@@ -174,10 +162,19 @@ loaded.
 
 =back
 
+=head1 ENVIRONMENT VARIABLES
+
+C<LANGUAGE>, C<LANG>, C<LC_MESSAGES> etc, as per C<I18N::LangTags::Detect>.
+
 =head1 SEE ALSO
 
-L<Time::Duration::LocaleObject>, L<Time::Duration>, L<Time::Duration::ja>
-L<Time::Duration::pt>, L<Time::Duration::sv>
+L<Time::Duration::LocaleObject>,
+L<Time::Duration>
+L<Time::Duration::fr>,
+L<Time::Duration::ja>,
+L<Time::Duration::pt>,
+L<Time::Duration::sv>,
+L<I18N::LangTags::Detect>
 
 =head1 HOME PAGE
 

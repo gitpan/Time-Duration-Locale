@@ -16,7 +16,7 @@
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 package Time::Duration::LocaleObject;
-use 5.005;
+use 5.004;
 use strict;
 use warnings;
 use Carp;
@@ -27,12 +27,13 @@ use Class::Singleton;
 @ISA = ('Class::Singleton');
 *_new_instance = \&new;
 
-$VERSION = 4;
+$VERSION = 6;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
 sub new {
+  ### LocaleObject new(): @_
   my ($class, %self) = @_;
   my $self = bless \%self, $class;
 
@@ -60,6 +61,7 @@ sub module {
     my ($module) = @_;
     if (defined $module) {
       # guard against infinite recursion on Time::Duration::Locale
+      # maybe should restrict to lower-case module names
       if ($module eq 'Time::Duration::Locale'
           || $module eq 'Time::Duration::LocaleObject') {
         croak 'Don\'t set module to Locale or LocaleObject';
@@ -98,54 +100,6 @@ sub _module_to_language {
 }
 
 #------------------------------------------------------------------------------
-# languages_method() and language_preferences() not yet documented
-# ... don't use them
-
-use constant DEFAULT_LANGUAGES_METHOD => 'language_preferences_ENV';
-
-sub languages_method {
-  my $self = shift;
-  ref $self or $self = $self->instance;
-  if (@_) {
-    my ($method) = @_;
-    $self->{'languages_method'} = $method;
-  }
-  return ($self->{'languages_method'} || DEFAULT_LANGUAGES_METHOD);
-}
-
-sub language_preferences {
-  my ($class_or_self) = shift;
-  my $method = $class_or_self->languages_method;
-  return $class_or_self->$method;
-}
-sub language_preferences_Glib {
-  ### language_preferences_Glib()
-  require Glib;
-  return Glib::get_language_names();
-}
-sub language_preferences_ENV {
-  my @langs;
-
-  # cf Locale::gettext_pp::__load_domain()
-  if (defined $ENV{'LANGUAGE'}) {
-    unshift @langs, split /:/, $ENV{'LANGUAGE'};
-    # double say 'it' to 'it_IT' the same as gettext does; though there's no
-    # modules on cpan named like that as of June 2009
-    @langs = map {/^([^_]*)$/s ? ($_, "$1_\U$1") : ($_)} @langs;
-  }
-  push @langs,
-    ($ENV{'LC_ALL'} || ''),
-      ($ENV{'LC_MESSAGES'} || ''),
-        ($ENV{'LANG'} || '');
-
-  # lose trailing codeset, so say 'en_IN.UTF8' -> 'en_IN'
-  foreach (@langs) { s/\..*//s }
-
-  # lose possible empty strings
-  return grep {$_ ne ''} @langs;
-}
-
-#------------------------------------------------------------------------------
 # setlocale
 
 sub setlocale {
@@ -153,29 +107,45 @@ sub setlocale {
   ref $self or $self = $self->instance;
   ### TDLObj setlocale()
 
-  my @langs = $self->language_preferences;
-
-  # Replicate without territory, so say it_IT,sv -> it_IT,sv,it.
-  # This is an append to @langs so en_AU,en_GB -> en_AU,en_GB,en, thereby
-  # preserving the territory preferences before falling back to generics.
+  # I18N::LangTags version 0.30 for implicate_supers_strictly(), don't worry
+  # about a I18N::LangTags->VERSION(0.30), it'll bomb
   #
-  push @langs, (map {/(.*)_/s ? $1 : ()} @langs);
+  require I18N::LangTags;
+  require I18N::LangTags::Detect;
 
-  # default to plain 'Time::Duration'
-  push @langs, 'en';
-
-  ### try langs: @langs
-
+  # Prefer implicate_supers_strictly() over implicate_supers() since the
+  # latter loses territory preferences when it converts
+  #
+  #    en-au, en-gb -> en-au, en, en-gb
+  #
+  # whereas implicate_supers_strictly() keeps gb ahead of generic en
+  #
+  #    en-au, en-gb -> en-au, en-gb, en
+  #
+  # Not that it makes a difference as of July 2010 since there's no
+  # territory flavours (only the joke en_PIGLATIN).
+  #
+  # Chances are though that if you put in territory preferences in $LANGUAGE
+  # you'll want to include generics explicitly at the desired points, and in
+  # that case implicate_supers() and implicate_supers_strictly() come out
+  # the same.
+  #
   my %seen;
   my $error;
-  foreach my $lang (@langs) {
-    next if $seen{$lang}++;
+  foreach my $dashlang (I18N::LangTags::implicate_supers_strictly
+                      (I18N::LangTags::Detect::detect()),
+                    'en') {
+    next if $seen{$dashlang}++;
+
+    (my $lang = $dashlang) =~ s/-(.*)/_\U$1/g;
+    ### $dashlang
+    ### attempt lang: $lang
+
     if (eval { $self->language($lang); 1 }) {
       # return value not documented ... don't use it yet
       return $lang;
     }
     $error = $@;
-    ### $lang
     ### $error
   }
   croak "Time::Duration not available -- $error";
@@ -247,9 +217,11 @@ sub _make_dispatcher {
 1;
 __END__
 
+=for stopwords OOPery POSIX TDLObj LocaleObject ja funcs subr coderef Ryde
+
 =head1 NAME
 
-Time::Duration::LocaleObject - time duration chosen by an object
+Time::Duration::LocaleObject - time duration string in language chosen by an object
 
 =head1 SYNOPSIS
 
@@ -264,20 +236,19 @@ possible language-specific C<Time::Duration> modules.  The methods
 correspond to the function calls in those modules.  The target module is
 established from the user's locale, or can be set explicitly.
 
-Most of the time this module is unnecessary, a single global choice based on
-the locale is enough, per
-L<C<Time::Duration::Locale>|Time::Duration::Locale>.  But some OOPery is not
-too much more trouble than a plain functions module and it's handy if your
-program works with multiple locales more or less simultaneously (something
-pretty painful with the POSIX global-only things).
+Most of the time this module is unnecessary.  A single global language
+choice based on the locale is usually enough, per C<Time::Duration::Locale>.
+But some OOPery is not much more trouble than plain functions and it's handy
+if your program works with multiple locales more or less simultaneously
+(something fairly painful with the POSIX global-only things).
 
 =head1 METHODS
 
 In the following methods TDLObj means either a LocaleObject instance or the
 class name C<Time::Duration::Locale>.
 
-    print Time::Duration::LocaleObject->ago(120);
-    print $tdl->ago(120);
+    print Time::Duration::LocaleObject->ago(120),"\n";
+    print $tdl->ago(120),"\n";
 
 The class name form operates on a global singleton instance which is used by
 C<Time::Duration::Locale>.
@@ -286,13 +257,13 @@ C<Time::Duration::Locale>.
 
 =over 4
 
-=item C<Time::Duration::LocaleObject-E<gt>new (key =E<gt> value, ...)>
+=item C<$tdl = Time::Duration::LocaleObject-E<gt>new (key =E<gt> value, ...)>
 
 Create and return a new LocaleObject.  Optional key/value pairs can give an
-initial C<module> or C<language> as per the settings below, instead of using
-the locale settings.
+explicit C<module> or C<language> to be applied per the L<Settings Methods>
+below.
 
-    # for locale settings
+    # for locale
     my $tdl = Time::Duration::LocaleObject->new;
 
     # for explicit language
@@ -300,14 +271,14 @@ the locale settings.
 
     # for explicit language specified by module
     my $tdl = Time::Duration::LocaleObject->new
-                (module => 'Time::Duration::la_PIG');
+                (module => 'Time::Duration::en_PIGLATIN');
 
 =back
 
 =head2 Duration Methods
 
 As per the C<Time::Duration> functions.  (Any new future functions should
-work too, methods pass through transparently.)
+work too since methods pass through transparently.)
 
 =over 4
 
@@ -333,6 +304,15 @@ work too, methods pass through transparently.)
 
 =item C<TDLObj-E<gt>concise ($str)>
 
+For example,
+
+    # instance method using selected language
+    my $tdl = Time::Duration::LocaleObject->new (language => 'ja');
+    print $tdl->duration(120),"\n";
+
+    # class method using locale language
+    print Time::Duration::LocaleObject->later(10),"\n";
+
 =back
 
 =head2 Settings Methods
@@ -341,9 +321,9 @@ work too, methods pass through transparently.)
 
 =item C<$lang = TDLObj-E<gt>language ()>
 
-=item C<TDLObj-E<gt>language ($lang)>
-
 =item C<$module = TDLObj-E<gt>module ()>
+
+=item C<TDLObj-E<gt>language ($lang)>
 
 =item C<TDLObj-E<gt>module ($module)>
 
@@ -357,33 +337,42 @@ loaded.
 
 =item C<TDLObj-E<gt>setlocale ()>
 
-Set the language according to the user's locale settings such as the
-C<LANGUAGE> and C<LANG> environment variables.
+Set the language according to the user's locale settings.  The current
+implementation uses C<I18N::LangTags::Detect>.
 
 This is called automatically by the duration methods above if no language
 has otherwise been set, so there's normally no need to explicitly
-C<setlocale>.  But call it if you change the environment variables and want
+C<setlocale>.  Call it if you change the environment variables and want
 TDLObj to follow.
 
 =back
 
 =head1 OTHER NOTES
 
-In the current implementation C<can()> checks whether the target module has
-such a function.  This is probably what you want, though a later change of
-language could reveal extra funcs in another module.  In any case a C<can()>
-subr of course follows the module of its target object when called, not
-whatever it saw when created.
+In the current implementation C<TDLObj-E<gt>can()> checks whether its target
+module has such a function.  This is probably what you want, though if you
+later selecting a different language in the TDLObj object then it might
+suddenly reveal extra funcs in another module.
 
-A C<can()> subr returned is stored as a method in the
-C<Time::Duration::LocaleObject> symbol table, as a cache against future
-C<can()> calls and to bypass C<AUTOLOAD> if later invoked by name.  Not sure
-if this is worth the trouble.
+A C<TDLObj-E<gt>can()> subr returned is stored as a method in the
+C<Time::Duration::LocaleObject> symbol table.  This caches it ready for
+future C<can()> calls and avoids C<AUTOLOAD> if invoked directly.  Not
+certain if this is worth the trouble, but it's probably sensible to have
+repeated C<can()> calls return the same coderef each time.
+
+=head1 ENVIRONMENT VARIABLES
+
+C<LANGUAGE>, C<LANG>, C<LC_MESSAGES> etc, as per C<I18N::LangTags::Detect>.
 
 =head1 SEE ALSO
 
-L<Time::Duration::Locale>, L<Time::Duration>, L<Time::Duration::ja>
-L<Time::Duration::pt>, L<Time::Duration::sv>
+L<Time::Duration::Locale>,
+L<Time::Duration>,
+L<Time::Duration::fr>,
+L<Time::Duration::ja>,
+L<Time::Duration::pt>,
+L<Time::Duration::sv>,
+L<I18N::LangTags::Detect>
 
 =head1 HOME PAGE
 

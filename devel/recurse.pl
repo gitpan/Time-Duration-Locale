@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 # Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
@@ -15,24 +17,18 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
-
-package Time::Duration::Upper;
-use 5.004;
 use strict;
 use warnings;
-use Carp;
-use Time::Duration::Filter from => 'Time::Duration';
-use vars qw($VERSION);
+use lib 'lib';
+use Time::Duration::Locale;
 
-print "Upper AUTOLOAD func ", \&AUTOLOAD, "\n";
-
-$VERSION = 2;
-
-sub _filter {
-  my ($str) = @_;
-  print "filter $str\n";
-  return uc($str);
+Time::Duration::Locale::module('Time::Duration::Filter');
+{
+  my $module = Time::Duration::Locale::module();
+  print "module ",(defined $module ? $module : 'undef'), "\n";
 }
+print "main duration() is ",\&duration,"\n";
+print duration(45*86400+6*3600),"\n";
+print duration(150),"\n";
 
-1;
-__END__
+exit 0;

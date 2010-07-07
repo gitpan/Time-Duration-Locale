@@ -17,8 +17,14 @@ with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
+Version 6, July 2010
+    - use I18N::LangTags::Detect for language preferences
+
+Version 5, June 2010
+    - cross reference Time::Duration::fr
+
 Version 4, April 2010
-    - cross reference Time::Duration::pt too
+    - cross reference Time::Duration::pt
 
 Version 3, January 2010
     - test script watch out for threads.pm not available

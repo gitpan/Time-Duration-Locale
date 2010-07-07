@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -17,12 +17,19 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
+use 5.010;
 use strict;
 use warnings;
 use File::Spec;
 use FindBin;
 use lib File::Spec->catdir($FindBin::Bin,'lib');
 use Time::Duration::en_PIGLATIN;
+
+{
+  require Lingua::PigLatin;
+  say  Lingua::PigLatin::piglatin('The string this quick trip scram stupid ghost');
+  exit 0;
+}
 
 print "main duration() is ",\&duration,"\n";
 print Time::Duration::en_PIGLATIN::_filter("hello world\n");

@@ -20,12 +20,12 @@
 use strict;
 use warnings;
 use Time::Duration::Locale;
-use Test::More tests => 30;
+use Test::More tests => 36;
 
 SKIP: { eval 'use Test::NoWarnings; 1'
           or skip 'Test::NoWarnings not available', 1; }
 
-my $want_version = 4;
+my $want_version = 6;
 is ($Time::Duration::Locale::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::Locale->VERSION,  $want_version,
@@ -108,5 +108,18 @@ cmp_ok (concise(duration(123)), 'ne', '',
   ok (! $ret, 'testnosuchfunction() fails');
   like ($error, '/No such function/', 'testnosuchfunction() error message');
 }
+
+#------------------------------------------------------------------------------
+# module() setting
+
+foreach my $module ('Time::Duration::Locale', 'Time::Duration::LocaleObject') {
+  ok (eval "require $module", "load $module");
+  my $got = eval { Time::Duration::Locale::module($module); 1 };
+  my $err = $@;
+  ok (! $got, "module() refuse to set recursive $module");
+  like ($err, '/Locale or LocaleObject/',
+        "module() error message for $module");
+}
+
 
 exit 0;

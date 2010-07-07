@@ -17,7 +17,7 @@
 # You should have received a copy of the GNU General Public License along
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
-use 5.005;
+use 5.004;
 use strict;
 use warnings;
 use ExtUtils::MakeMaker;
@@ -28,12 +28,20 @@ MyMakeMakerExtras::WriteMakefile
   (NAME         => 'Time-Duration-Locale',
    ABSTRACT     => 'Dispatch to language-specific Time::Duration module.',
    VERSION_FROM => 'lib/Time/Duration/Locale.pm',
-   MIN_PERL_VERSION => '5.005',
+
+   # 5.004 for named vars in foreach, probably more
+   MIN_PERL_VERSION => '5.004',
+
    PREREQ_PM    => {
                     'Class::Singleton' => 0,
                     'Module::Load' => 0,
                     'Time::Duration' => 0,
                     'warnings' => 0,
+
+                    # version 0.30 for implicate_supers_strictly(), comes
+                    # with perl 5.10
+                    'I18N::LangTags' => '0.30',
+                    'I18N::LangTags::Detect' => 0,
 
                     'Test::More' => 0,
                    },
@@ -51,7 +59,7 @@ MyMakeMakerExtras::WriteMakefile
              => { description => 'Have all language-specific Time::Duration modules available (those known at the time of writing ...).',
                   requires => { 'Time::Duration::ja' => 0,
                                 'Time::Duration::sv' => 0,
-                              }
+                              },
                 },
              maximum_tests
              => { description => 'Have "make test" do as much as possible.',

@@ -13,9 +13,11 @@ devel/exported-autoload.pl
 devel/exported-autoload2.pl
 devel/exporter-renaming.pl
 devel/filter.pl
+devel/langtags.pl
 devel/lib/Module/DynamicDelegate.pm
 devel/lib/Time/Duration/Upper.pm
 devel/pig.pl
+devel/recurse.pl
 devel/run-obj.pl
 devel/run.pl
 examples/simple.pl

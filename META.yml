@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Time-Duration-Locale
-version:            4
+version:            6
 abstract:           Dispatch to language-specific Time::Duration module.
 author:
     - Kevin Ryde <user42@zip.com.au>
@@ -11,12 +11,14 @@ configure_requires:
 build_requires:
     ExtUtils::MakeMaker:  0
 requires:
-    Class::Singleton:  0
-    Module::Load:      0
-    perl:              5.005
-    Test::More:        0
-    Time::Duration:    0
-    warnings:          0
+    Class::Singleton:     0
+    I18N::LangTags:       0.30
+    I18N::LangTags::Detect:  0
+    Module::Load:         0
+    perl:                 5.004
+    Test::More:           0
+    Time::Duration:       0
+    warnings:             0
 resources:
     homepage:  http://user42.tuxfamily.org/time-duration-locale/index.html
     license:   http://www.gnu.org/licenses/gpl.html
@@ -44,11 +46,12 @@ optional_features:
     maximum_tests:
         description:  Have "make test" do as much as possible.
         requires:
+            File::Spec:          0
             Parse::CPAN::Meta:   0
             Test::DistManifest:  0
             Test::NoWarnings:    0
             Test::Pod:           1.00
-            Test::YAML::Meta:    0.13
+            Test::YAML::Meta:    0.15
             threads:             0
             YAML:                0
             YAML::Syck:          0

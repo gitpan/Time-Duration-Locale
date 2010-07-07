@@ -21,31 +21,34 @@ use strict;
 use warnings;
 use lib 'lib';
 BEGIN {
-  $ENV{'LANGUAGE'} = 'pt:en:sv';
+  $ENV{'LANGUAGE'} = 'xx_YY:zz:fr_FR:fr:en_PIGLATIN:pt:en_AU:sv';
 }
-use Time::Duration::Locale '-language_preferences_Glib';
+use Time::Duration::Locale;
+
+use FindBin;
+my $progname = $FindBin::Script;
 
 
 # Time::Duration::Locale::setlocale();
 {
   my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
+  print "$progname: module ",(defined $module ? $module : 'undef'), "\n";
 }
-print "main duration() is ",\&duration,"\n";
+print "$progname: main duration() is ",\&duration,"\n";
 {
   require Time::Duration;
-  print "Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
+  print "$progname: Time::Duration::duration() is ",\&Time::Duration::duration,"\n";
 }
 
-print duration(45*86400+6*3600),"\n";
+print "$progname: ",duration(45*86400+6*3600),"\n";
 
-$ENV{'LANGUAGE'} = 'la_PIG:it:sv';
+$ENV{'LANGUAGE'} = 'pt:en_PIGLATIN:it:sv';
 Time::Duration::Locale::setlocale();
 {
   my $module = Time::Duration::Locale::module();
-  print "module ",(defined $module ? $module : 'undef'), "\n";
+  print "$progname: module ",(defined $module ? $module : 'undef'), "\n";
 }
 
-print duration(150),"\n";
+print "$progname: ",duration(150),"\n";
 
 exit 0;

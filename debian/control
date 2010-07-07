@@ -25,14 +25,14 @@ Section: perl
 Priority: optional
 Build-Depends: cdbs, debhelper (>= 5)
 Maintainer: Kevin Ryde <user42@zip.com.au>
-Standards-Version: 3.8.4
+Standards-Version: 3.9.0
 Homepage: http://user42.tuxfamily.org/time-duration-locale/index.html
 Bugs: mailto:user42@zip.com.au
 
 Package: libtime-duration-locale-perl
 Architecture: all
-Depends: perl, ${perl:Depends}, ${misc:Depends}
-Suggests: libtime-duration-ja-perl, libtime-duration-pt-perl, libtime-duration-sv-perl
+Depends: perl (>= 5.005), libclass-singleton-perl, libi18n-langtags-perl (>= 0.30) | perl (>= 5.10), libi18n-langtags-detect-perl | perl (>= 5.8.5), libtime-duration-perl, libmodule-load-perl | perl (>= 5.10), libwarnings-perl | perl (>= 5.6), ${perl:Depends}, ${misc:Depends}
+Suggests: libtime-duration-fr-perl, libtime-duration-ja-perl, libtime-duration-pt-perl, libtime-duration-sv-perl
 Description: Time::Duration from locale settings
  Time::Duration::Locale selects a language-specific sub-module of
  Time::Duration according to the user's locale settings or a
