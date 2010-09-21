@@ -64,7 +64,6 @@ MyMakeMakerExtras::WriteMakefile
              maximum_tests
              => { description => 'Have "make test" do as much as possible.',
                   requires => { 'threads' => 0,
-                                'Test::NoWarnings' => 0,
                               },
                 },
              maximum_devel

@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # Copyright 2009, 2010 Kevin Ryde
 
@@ -21,14 +21,13 @@ use 5.004;
 use strict;
 use warnings;
 use Time::Duration::LocaleObject;
-use Test::More tests => 25;
+use Test::More tests => 24;
 
-BEGIN {
- SKIP: { eval 'use Test::NoWarnings; 1'
-           or skip 'Test::NoWarnings not available', 1; }
-}
+use lib 't';
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
 
-my $want_version = 6;
+my $want_version = 7;
 is ($Time::Duration::LocaleObject::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::LocaleObject->VERSION,  $want_version,

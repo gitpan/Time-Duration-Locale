@@ -1,5 +1,5 @@
-libtime-duration-locale-perl (6-1) unstable; urgency=low
+libtime-duration-locale-perl (7-1) unstable; urgency=low
 
   * Packaged version.
 
- -- Kevin Ryde <user42@zip.com.au>  Thu, 08 Jul 2010 08:35:44 +1000
+ -- Kevin Ryde <user42@zip.com.au>  Tue, 21 Sep 2010 10:34:13 +1000

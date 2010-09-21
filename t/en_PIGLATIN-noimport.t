@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
 # Copyright 2009, 2010 Kevin Ryde
 
@@ -21,10 +21,11 @@ use 5.004;
 use strict;
 use warnings;
 use Time::Duration::en_PIGLATIN ();
-use Test::More tests => 8;
+use Test::More tests => 7;
 
-SKIP: { eval 'use Test::NoWarnings; 1'
-          or skip 'Test::NoWarnings not available', 1; }
+use lib 't';
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
 
 ok (! defined &duration, 'duration() should not be imported');
 ok (! defined &ago,      'ago() should not be imported');

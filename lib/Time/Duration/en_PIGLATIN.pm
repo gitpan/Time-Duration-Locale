@@ -24,7 +24,7 @@ use warnings;
 use Time::Duration::Filter;  #  from => 'Time::Duration';
 
 use vars '$VERSION';
-$VERSION = 6;
+$VERSION = 7;
 
 sub _filter {
   my ($str) = @_;
@@ -72,7 +72,7 @@ sub _follow_caps {
 # use Time::Duration ();
 # use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS);
 # 
-# $VERSION = 6;
+# $VERSION = 7;
 # 
 # use Exporter;
 # @ISA = ('Exporter');

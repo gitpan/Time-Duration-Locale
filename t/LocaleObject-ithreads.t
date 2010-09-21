@@ -1,6 +1,6 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -29,10 +29,11 @@ $Config{useithreads}
 eval { require threads } # new in perl 5.8, maybe
   or plan skip_all => "threads.pm not available: $@";
 
-plan tests => 2;
+plan tests => 1;
 
-SKIP: { eval 'use Test::NoWarnings; 1'
-          or skip 'Test::NoWarnings not available', 1; }
+use lib 't';
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
 
 
 # This is only meant to check that any CLONE() done by threads works with

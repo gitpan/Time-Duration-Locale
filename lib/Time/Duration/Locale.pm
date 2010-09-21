@@ -23,7 +23,7 @@ use Carp;
 use Time::Duration::LocaleObject;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $AUTOLOAD);
 
-$VERSION = 6;
+$VERSION = 7;
 
 use Exporter;
 @ISA = ('Exporter');

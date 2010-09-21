@@ -1,6 +1,6 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
-# Copyright 2009 Kevin Ryde
+# Copyright 2009, 2010 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -20,10 +20,11 @@
 use strict;
 use warnings;
 use Time::Duration::Locale ();
-use Test::More tests => 21;
+use Test::More tests => 20;
 
-SKIP: { eval 'use Test::NoWarnings; 1'
-          or skip 'Test::NoWarnings not available', 1; }
+use lib 't';
+use MyTestHelpers;
+BEGIN { MyTestHelpers::nowarnings() }
 
 ok (! defined &duration, 'duration() should not be imported');
 ok (! defined &ago,      'ago() should not be imported');

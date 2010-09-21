@@ -17,6 +17,9 @@ with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 
 
+Version 7, September 2010
+    - test manifest only as an author test
+
 Version 6, July 2010
     - use I18N::LangTags::Detect for language preferences
 

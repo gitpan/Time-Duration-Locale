@@ -27,7 +27,7 @@ use Class::Singleton;
 @ISA = ('Class::Singleton');
 *_new_instance = \&new;
 
-$VERSION = 6;
+$VERSION = 7;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
