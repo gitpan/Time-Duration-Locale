@@ -1,4 +1,4 @@
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -19,7 +19,6 @@ package Time::Duration::Filter;
 use 5.004;
 use strict;
 no strict 'refs';
-use warnings;
 use Carp;
 use Module::Load;
 use vars qw($VERSION $AUTOLOAD);
@@ -27,7 +26,7 @@ use vars qw($VERSION $AUTOLOAD);
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-$VERSION = 7;
+$VERSION = 8;
 
 my @_target_ISA = ('Exporter');
 
@@ -129,7 +128,7 @@ http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
-Copyright 2009, 2010 Kevin Ryde
+Copyright 2009, 2010, 2011 Kevin Ryde
 
 Time-Duration-Locale is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the

@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.63.
+signed via the Module::Signature module, version 0.66.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -15,16 +15,16 @@ not run its Makefile.PL or Build.PL.
 Hash: SHA1
 
 SHA1 842745cb706f8f2126506f544492f7a80dbe29b3 COPYING
-SHA1 93c5c3dda7b90c2daae4883aa344bc9f32c7263a Changes
+SHA1 779d5062159dfbd391da9e19e2ca28aa65a15c76 Changes
 SHA1 244bc78c4fd377892cec1656b3608055cbdd2f52 MANIFEST
-SHA1 e6e7c2904ea5d300c0ddf70fc5a80f5005229aa9 MANIFEST.SKIP
-SHA1 bb8d05db456fef27e1877505e58ca9bbad49a134 META.yml
-SHA1 696a88537dc676ad3c1f945c6ff162789ae731fc Makefile.PL
+SHA1 6c771cc4b0718f7bc9c9af01889700d7bce0a8e6 MANIFEST.SKIP
+SHA1 04b14561fb37dcd914c2b4f12a3d0f9a9a7a40d3 META.yml
+SHA1 b20c47d6c5f9b69781b607ae7ffb176805c923fe Makefile.PL
 SHA1 f0cde2291ac124ba0791d8ea29c268719a5a81ec README
-SHA1 b085ac7e2527debde54b7cfd2f9c5f7f2d22d859 debian/changelog
+SHA1 0daf75b4348511c1c6ce883f3f0034331fe900d1 debian/changelog
 SHA1 ac3478d69a3c81fa62e60f5c3696165a4e5e6ac4 debian/compat
-SHA1 e45f41c17111a43d58a973ab2c38e3ed5435fd36 debian/control
-SHA1 aa4e7ee0770e88617e0cc8f0660fa227b47e133c debian/copyright
+SHA1 71be8bd617152c1338c89b2e6022df0d4ee862a8 debian/control
+SHA1 1c3900934ccd867f1ef5f8c860955fbaddc8ed36 debian/copyright
 SHA1 cdbce099f4915aabbd7dd379e63f2e34a7ccbffb debian/rules
 SHA1 61652cd1568dcf2614df833eba241755eee34e89 debian/source/format
 SHA1 b5fe4a58fb500050deff80a3a3541ae0b53e96e1 debian/watch
@@ -36,34 +36,34 @@ SHA1 68f22d204f7dad59bbfec25fc98fd11cb0f26fe1 devel/exporter-renaming.pl
 SHA1 66f7ce1f628854c7e036241d32963a08bd55dcd3 devel/filter.pl
 SHA1 804fa408faba5b315be8a28cc932696198708fdc devel/langtags.pl
 SHA1 80ebb3c699e5d9829b3deb1c044dcd63b89280e0 devel/lib/Module/DynamicDelegate.pm
-SHA1 4369cfb9acc9e6999afdf12cb20af9dd7f425710 devel/lib/Time/Duration/Upper.pm
+SHA1 e78ad21cb7c98e212cdee70502e2b99a25a58532 devel/lib/Time/Duration/Upper.pm
 SHA1 33a2c1d4ba6957d5ff02527053f19a57b2fb554e devel/pig.pl
 SHA1 1167a152b633a973325dff0f4867e8bc1cfecefe devel/recurse.pl
 SHA1 d7e90fd07cf96e094862c7a3d9c034dab0118810 devel/run-obj.pl
 SHA1 8f029c440f2a6cfeb9f30539645e0a1f1375dfd6 devel/run.pl
-SHA1 5fed1f4f594cd7ade1725e908639c968bbbb787c examples/simple.pl
-SHA1 3cf3345a9177dbe362dfc8fbf192272f4a611ca8 inc/MyMakeMakerExtras.pm
-SHA1 692a1ddc2ca6b98cac7b48ea40bc1ac1509e8ed9 inc/my_pod2html
-SHA1 906abdb2ff03a748288f19b29a9cc81a3810c4ca lib/Time/Duration/Filter.pm
-SHA1 c670247e16fc94e075439f2fca114eec16241697 lib/Time/Duration/Locale.pm
-SHA1 f3811e4b0141e21977a4f24957595bbbd1551185 lib/Time/Duration/LocaleObject.pm
-SHA1 ed912ff27fedfc32aa8c03fccd6cd17f29252760 lib/Time/Duration/en_PIGLATIN.pm
-SHA1 a2f1619fca601af93e96544edd018946eb42cbe6 t/Locale-noimport.t
-SHA1 49bb60fe59e4aebca0772dee3874c72d5da941fc t/Locale.t
-SHA1 d2d833a3274a3d3f6de206b1730705be618b8b14 t/LocaleObject-ithreads.t
-SHA1 f369bb590175d73462e61c4c82b5540ab9e4dbb0 t/LocaleObject.t
-SHA1 5e5680b471811244fe93571efc23e7b6089cac3b t/MyTestHelpers.pm
-SHA1 c6e69fb0a48c0b2f58f44c48d07b169639a3f12e t/en_PIGLATIN-noimport.t
-SHA1 561b0880bbc977973692c8e818eb68b840363248 t/en_PIGLATIN.t
-SHA1 9127f78a0dfa04976acbb979dd7862ef59a74c58 xt/0-META-read.t
-SHA1 37abd43b41068804ea4bb099fdd89af21be82926 xt/0-Test-DistManifest.t
-SHA1 8f93fb4c8f0424a4442cc93c9a2e86342ef55281 xt/0-Test-Pod.t
-SHA1 fb517c2fae5ddac559318bf6a224949115ea3129 xt/0-Test-YAML-Meta.t
+SHA1 ba931381b0daeb110df7a3c6806411956458d933 examples/simple.pl
+SHA1 cf647ee28a7aaad9896d0063f8a2529919ccfcd3 inc/MyMakeMakerExtras.pm
+SHA1 7a988b2aa7ed09f1cb9029a1ef3f0e2139dca0cf inc/my_pod2html
+SHA1 e42526396f9faed9d2d27164f28dd0644cb15efe lib/Time/Duration/Filter.pm
+SHA1 529c872f9ffb42f3ffee7d3a22fb85a6ab98524d lib/Time/Duration/Locale.pm
+SHA1 60f584bd2d93192a98866778defea7fc86cac048 lib/Time/Duration/LocaleObject.pm
+SHA1 5d99847194954e0ebee19137be5922ce51d4708c lib/Time/Duration/en_PIGLATIN.pm
+SHA1 42f30ffb92ceb1fdca319fe562af8e991c9e0ebb t/Locale-noimport.t
+SHA1 159408f77558b7900018769d4ae9e3aff61492db t/Locale.t
+SHA1 02af74bf40772739f5bf041668e54dc2d1ba87a0 t/LocaleObject-ithreads.t
+SHA1 0b2e47592c61ad77d06056ff44cdf2459f17ff88 t/LocaleObject.t
+SHA1 36b8eba56c87d62b1b41959187c717577dc16fa5 t/MyTestHelpers.pm
+SHA1 3db9b8ad124e0b13a06484d8a3c79f906b79fc91 t/en_PIGLATIN-noimport.t
+SHA1 9a4008ea2c66c2c2730d43323718fe9ba026b581 t/en_PIGLATIN.t
+SHA1 0279c9310ec528d10a2a14e602bf98f1c776cce1 xt/0-META-read.t
+SHA1 8a5e0f34131de34e584fbb1939c191a152566155 xt/0-Test-DistManifest.t
+SHA1 cc04a5fe5d8b8b38bfd56453d5d2686c8ea58783 xt/0-Test-Pod.t
+SHA1 4c14845872d6eb4280e12f862d6ba2c343358c60 xt/0-Test-YAML-Meta.t
 SHA1 fd0b46f8e028f344490f2000a29ea79a4fefc0e1 xt/1-Test-Synopsis.t
 -----BEGIN PGP SIGNATURE-----
 Version: GnuPG v1.4.10 (GNU/Linux)
 
-iD8DBQFMl/2YLFMCIV9q3ToRAi2hAKCGv+iGz6drsE/kgNuXKqJ120prHwCgoPuz
-nlmtYHoVagB16Z7RG1jZOKE=
-=bH6A
+iD8DBQFNUJM2LFMCIV9q3ToRAhTJAKClYJlr38/DfDYdG0CQ6f7SLL3euQCfTleF
+hzzSv50RUOIskQFyjQ0kfm4=
+=Dybe
 -----END PGP SIGNATURE-----

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -19,7 +19,6 @@
 
 use 5.004;
 use strict;
-use warnings;
 use Time::Duration::LocaleObject;
 use Test::More tests => 24;
 
@@ -27,7 +26,7 @@ use lib 't';
 use MyTestHelpers;
 BEGIN { MyTestHelpers::nowarnings() }
 
-my $want_version = 7;
+my $want_version = 8;
 is ($Time::Duration::LocaleObject::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::LocaleObject->VERSION,  $want_version,

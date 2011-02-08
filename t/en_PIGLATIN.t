@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -18,7 +18,6 @@
 # with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 use strict;
-use warnings;
 use Time::Duration::en_PIGLATIN;
 use Test::More tests => 33;
 
@@ -26,7 +25,7 @@ use lib 't';
 use MyTestHelpers;
 BEGIN { MyTestHelpers::nowarnings() }
 
-my $want_version = 7;
+my $want_version = 8;
 is ($Time::Duration::en_PIGLATIN::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::en_PIGLATIN->VERSION, $want_version,

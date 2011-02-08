@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-# Copyright 2008, 2009, 2010 Kevin Ryde
+# Copyright 2008, 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -19,7 +19,6 @@
 
 use 5.004;
 use strict;
-use warnings;
 use ExtUtils::MakeMaker;
 use lib 'inc';
 use MyMakeMakerExtras;
@@ -29,6 +28,7 @@ MyMakeMakerExtras::WriteMakefile
    ABSTRACT     => 'Dispatch to language-specific Time::Duration module.',
    VERSION_FROM => 'lib/Time/Duration/Locale.pm',
 
+   # Time::Duration is almost any 5.0
    # 5.004 for named vars in foreach, probably more
    MIN_PERL_VERSION => '5.004',
 
@@ -36,7 +36,6 @@ MyMakeMakerExtras::WriteMakefile
                     'Class::Singleton' => 0,
                     'Module::Load' => 0,
                     'Time::Duration' => 0,
-                    'warnings' => 0,
 
                     # version 0.30 for implicate_supers_strictly(), comes
                     # with perl 5.10
@@ -50,29 +49,32 @@ MyMakeMakerExtras::WriteMakefile
    LICENSE      => 'gpl',
    SIGN         => 1,
 
-   META_MERGE
-   => { resources
-        => { homepage => 'http://user42.tuxfamily.org/time-duration-locale/index.html' },
+   META_MERGE =>
+   { resources =>
+     { homepage =>
+       'http://user42.tuxfamily.org/time-duration-locale/index.html' },
 
-        optional_features
-        => { maximum_languages
-             => { description => 'Have all language-specific Time::Duration modules available (those known at the time of writing ...).',
-                  requires => { 'Time::Duration::ja' => 0,
-                                'Time::Duration::sv' => 0,
-                              },
-                },
-             maximum_tests
-             => { description => 'Have "make test" do as much as possible.',
-                  requires => { 'threads' => 0,
-                              },
-                },
-             maximum_devel
-             => { description => 'Stuff used variously for development.',
-                  requires => { 'Devel::Peek' => 0,
-                              },
-                },
-           },
-      },
+     optional_features =>
+     { maximum_languages =>
+       { description => 'Have all language-specific Time::Duration modules available (those known at the time of writing ...).',
+         requires => { 'Time::Duration::fr' => 0,
+                       'Time::Duration::ja' => 0,
+                       'Time::Duration::pt' => 0,
+                       'Time::Duration::sv' => 0,
+                     },
+       },
+       maximum_tests =>
+       { description => 'Have "make test" do as much as possible.',
+         requires => { 'threads' => 0,
+                     },
+       },
+       maximum_devel =>
+       { description => 'Stuff used variously for development.',
+         requires => { 'Devel::Peek' => 0,
+                     },
+       },
+     },
+   },
   );
 
 #------------------------------------------------------------------------------

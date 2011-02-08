@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Time-Duration-Locale
-version:            7
+version:            8
 abstract:           Dispatch to language-specific Time::Duration module.
 author:
     - Kevin Ryde <user42@zip.com.au>
@@ -18,7 +18,6 @@ requires:
     perl:                 5.004
     Test::More:           0
     Time::Duration:       0
-    warnings:             0
 resources:
     homepage:  http://user42.tuxfamily.org/time-duration-locale/index.html
     license:   http://www.gnu.org/licenses/gpl.html
@@ -42,7 +41,9 @@ optional_features:
     maximum_languages:
         description:  Have all language-specific Time::Duration modules available (those known at the time of writing ...).
         requires:
+            Time::Duration::fr:  0
             Time::Duration::ja:  0
+            Time::Duration::pt:  0
             Time::Duration::sv:  0
     maximum_tests:
         description:  Have "make test" do as much as possible.

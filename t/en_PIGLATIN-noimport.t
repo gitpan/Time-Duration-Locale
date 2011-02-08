@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -19,7 +19,6 @@
 
 use 5.004;
 use strict;
-use warnings;
 use Time::Duration::en_PIGLATIN ();
 use Test::More tests => 7;
 

@@ -1,4 +1,4 @@
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -20,11 +20,10 @@
 package Time::Duration::en_PIGLATIN;
 use 5.004;
 use strict;
-use warnings;
 use Time::Duration::Filter;  #  from => 'Time::Duration';
 
 use vars '$VERSION';
-$VERSION = 7;
+$VERSION = 8;
 
 sub _filter {
   my ($str) = @_;
@@ -131,7 +130,7 @@ http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
-Copyright 2009, 2010 Kevin Ryde
+Copyright 2009, 2010, 2011 Kevin Ryde
 
 Time-Duration-Locale is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the

@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2011 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -29,7 +29,6 @@
 
 
 use strict;
-use warnings;
 use Time::Duration::Locale;
 
 print "next update is after ",duration(120),"\n";
