@@ -1,6 +1,6 @@
-#!/usr/bin/perl
+#!/usr/bin/perl -w
 
-# Copyright 2008, 2009, 2010, 2011 Kevin Ryde
+# Copyright 2008, 2009, 2010, 2011, 2012, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -20,10 +20,8 @@
 use 5.004;
 use strict;
 use ExtUtils::MakeMaker;
-use lib 'inc';
-use MyMakeMakerExtras;
 
-MyMakeMakerExtras::WriteMakefile
+WriteMakefile
   (NAME         => 'Time-Duration-Locale',
    ABSTRACT     => 'Dispatch to language-specific Time::Duration module.',
    VERSION_FROM => 'lib/Time/Duration/Locale.pm',
@@ -51,13 +49,16 @@ MyMakeMakerExtras::WriteMakefile
 
    META_MERGE =>
    { resources =>
-     { homepage =>
-       'http://user42.tuxfamily.org/time-duration-locale/index.html' },
+     { homepage => 'http://user42.tuxfamily.org/time-duration-locale/index.html',
+       license  => 'http://www.gnu.org/licenses/gpl.html',
+     },
+     no_index => { directory=>['devel','xt'] },
 
      optional_features =>
      { maximum_languages =>
        { description => 'Have all language-specific Time::Duration modules available (those known at the time of writing ...).',
          requires => { 'Time::Duration::fr' => 0,
+                       'Time::Duration::id' => 0,
                        'Time::Duration::ja' => 0,
                        'Time::Duration::pt' => 0,
                        'Time::Duration::sv' => 0,
@@ -68,18 +69,6 @@ MyMakeMakerExtras::WriteMakefile
          requires => { 'threads' => 0,
                      },
        },
-       maximum_devel =>
-       { description => 'Stuff used variously for development.',
-         requires => { 'Devel::Peek' => 0,
-                     },
-       },
      },
    },
   );
-
-#------------------------------------------------------------------------------
-package MY;
-sub postamble {
-  my ($makemaker) = @_;
-  return MyMakeMakerExtras::postamble ($makemaker);
-}

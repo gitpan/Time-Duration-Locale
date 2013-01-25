@@ -1,4 +1,4 @@
-# Copyright 2009, 2010, 2011 Kevin Ryde
+# Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -22,7 +22,7 @@ use Carp;
 use Time::Duration::LocaleObject;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $AUTOLOAD);
 
-$VERSION = 8;
+$VERSION = 9;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -103,12 +103,15 @@ Time::Duration::Locale - time duration string chosen by user's language preferen
 =head1 DESCRIPTION
 
 C<Time::Duration::Locale> has the same interface as C<Time::Duration> but
-chooses a language according to the user's locale settings.
+chooses a language according to the user's locale settings.  See
+F<examples/simple.pl> in the Time-Duration-Locale sources for a complete
+program printing a duration in the locale language.
 
-As of July 2010 available language modules on CPAN include
+As of January 2013 available language modules on CPAN include
 
     Time::Duration        English
     Time::Duration::fr    French
+    Time::Duration::id    Indonesian
     Time::Duration::ja    Japanese
     Time::Duration::pt    Portuguese
     Time::Duration::sv    Swedish
@@ -120,12 +123,12 @@ English module.
 
 Like C<Time::Duration>, the following functions are exported by default
 
-    later     later_exact
-    earlier   earlier_exact
-    ago       ago_exact
-    from_now  from_now_exact
-    duration  duration_exact
-    concise
+    later()       later_exact()
+    earlier()     earlier_exact()
+    ago()         ago_exact()
+    from_now()    from_now_exact()
+    duration()    duration_exact()
+    concise()
 
 =head1 EXTRA FUNCTIONS
 
@@ -168,8 +171,9 @@ C<LANGUAGE>, C<LANG>, C<LC_MESSAGES> etc, as per C<I18N::LangTags::Detect>.
 =head1 SEE ALSO
 
 L<Time::Duration::LocaleObject>,
-L<Time::Duration>
+L<Time::Duration>,
 L<Time::Duration::fr>,
+L<Time::Duration::id>,
 L<Time::Duration::ja>,
 L<Time::Duration::pt>,
 L<Time::Duration::sv>,
@@ -181,7 +185,7 @@ http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
-Copyright 2009, 2010, 2011 Kevin Ryde
+Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 Time-Duration-Locale is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the

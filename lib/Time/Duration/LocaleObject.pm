@@ -1,4 +1,4 @@
-# Copyright 2009, 2010, 2011 Kevin Ryde
+# Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -26,7 +26,7 @@ use Class::Singleton;
 @ISA = ('Class::Singleton');
 *_new_instance = \&new;
 
-$VERSION = 8;
+$VERSION = 9;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
@@ -236,10 +236,10 @@ correspond to the function calls in those modules.  The target module is
 established from the user's locale, or can be set explicitly.
 
 Most of the time this module is unnecessary.  A single global language
-choice based on the locale is usually enough, per C<Time::Duration::Locale>.
-But some OOPery is not much more trouble than plain functions and it's handy
-if your program works with multiple locales more or less simultaneously
-(something fairly painful with the POSIX global-only things).
+choice based on the locale is usually enough, as per
+C<Time::Duration::Locale>.  But some OOPery is not much more trouble than
+plain functions and it's handy if your program works with multiple locales
+simultaneously (something fairly painful with POSIX global-only things).
 
 =head1 METHODS
 
@@ -256,19 +256,19 @@ C<Time::Duration::Locale>.
 
 =over 4
 
-=item C<$tdl = Time::Duration::LocaleObject-E<gt>new (key =E<gt> value, ...)>
+=item C<$tdl = Time::Duration::LocaleObject-E<gt>new (key =E<gt> $value, ...)>
 
 Create and return a new LocaleObject.  Optional key/value pairs can give an
 explicit C<module> or C<language> to be applied per the L<Settings Methods>
 below.
 
-    # for locale
+    # locale settings
     my $tdl = Time::Duration::LocaleObject->new;
 
-    # for explicit language
+    # explicit language
     my $tdl = Time::Duration::LocaleObject->new (language => 'ja');
 
-    # for explicit language specified by module
+    # explicit language specified by module
     my $tdl = Time::Duration::LocaleObject->new
                 (module => 'Time::Duration::en_PIGLATIN');
 
@@ -276,8 +276,8 @@ below.
 
 =head2 Duration Methods
 
-As per the C<Time::Duration> functions.  (Any new future functions should
-work too since methods pass through transparently.)
+As per the C<Time::Duration> functions.  Any new future functions should
+work too since methods pass through transparently.
 
 =over 4
 
@@ -350,7 +350,7 @@ TDLObj to follow.
 
 In the current implementation C<TDLObj-E<gt>can()> checks whether its target
 module has such a function.  This is probably what you want, though if you
-later selecting a different language in the TDLObj object then it might
+later select a different language in the TDLObj object then it might
 suddenly reveal extra funcs in another module.
 
 A C<TDLObj-E<gt>can()> subr returned is stored as a method in the
@@ -368,6 +368,7 @@ C<LANGUAGE>, C<LANG>, C<LC_MESSAGES> etc, as per C<I18N::LangTags::Detect>.
 L<Time::Duration::Locale>,
 L<Time::Duration>,
 L<Time::Duration::fr>,
+L<Time::Duration::id>,
 L<Time::Duration::ja>,
 L<Time::Duration::pt>,
 L<Time::Duration::sv>,
@@ -379,7 +380,7 @@ http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
-Copyright 2009, 2010, 2011 Kevin Ryde
+Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 Time-Duration-Locale is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the

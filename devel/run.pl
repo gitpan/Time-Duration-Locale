@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2009, 2010 Kevin Ryde
+# Copyright 2009, 2010, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -21,7 +21,7 @@ use strict;
 use warnings;
 use lib 'lib';
 BEGIN {
-  $ENV{'LANGUAGE'} = 'xx_YY:zz:fr_FR:fr:en_PIGLATIN:pt:en_AU:sv';
+  $ENV{'LANGUAGE'} = 'xx_YY:zz:id:fr_FR:fr:en_PIGLATIN:pt:en_AU:sv';
 }
 use Time::Duration::Locale;
 

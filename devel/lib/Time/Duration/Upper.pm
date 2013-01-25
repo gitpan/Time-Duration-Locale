@@ -1,4 +1,4 @@
-# Copyright 2009, 2010, 2011 Kevin Ryde
+# Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -26,7 +26,7 @@ use vars qw($VERSION);
 
 print "Upper AUTOLOAD func ", \&AUTOLOAD, "\n";
 
-$VERSION = 8;
+$VERSION = 9;
 
 sub _filter {
   my ($str) = @_;

@@ -1,4 +1,4 @@
-# Copyright 2009, 2010, 2011 Kevin Ryde
+# Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -23,7 +23,7 @@ use strict;
 use Time::Duration::Filter;  #  from => 'Time::Duration';
 
 use vars '$VERSION';
-$VERSION = 8;
+$VERSION = 9;
 
 sub _filter {
   my ($str) = @_;
@@ -108,21 +108,23 @@ directly, or via C<Time::Duration::Locale> with language setting
 
 =head1 EXPORTS
 
-Like C<Time::Duration> the following functions are exported by default
+Like C<Time::Duration>, the following functions are exported by default
 
-    later     later_exact
-    earlier   earlier_exact
-    ago       ago_exact
-    from_now  from_now_exact
-    duration  duration_exact
-    concise
+    later()       later_exact()
+    earlier()     earlier_exact()
+    ago()         ago_exact()
+    from_now()    from_now_exact()
+    duration()    duration_exact()
+    concise()
 
-The exports follow C<Time::Duration> at run-time, so anything there is
+The exports follow C<Time::Duration> at run-time, so anything new there is
 automatically filtered and exported.
 
 =head1 SEE ALSO
 
 L<Time::Duration>, L<Time::Duration::Locale>
+
+L<Lingua::PigLatin>
 
 =head1 HOME PAGE
 
@@ -130,7 +132,7 @@ http://user42.tuxfamily.org/time-duration-locale/index.html
 
 =head1 COPYRIGHT
 
-Copyright 2009, 2010, 2011 Kevin Ryde
+Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 Time-Duration-Locale is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by the

@@ -1,4 +1,4 @@
-Copyright 2009, 2010, 2011 Kevin Ryde
+Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 This file is part of Time-Duration-Locale.
 
@@ -16,6 +16,9 @@ You should have received a copy of the GNU General Public License along
 with Time-Duration-Locale.  If not, see <http://www.gnu.org/licenses/>.
 
 
+
+Version 9, January 2013
+    - cross-ref Time::Duration::id
 
 Version 8, February 2011
     - fix Makefile.PL for perl 5.6 and earlier

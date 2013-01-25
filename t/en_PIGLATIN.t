@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 
-# Copyright 2009, 2010, 2011 Kevin Ryde
+# Copyright 2009, 2010, 2011, 2013 Kevin Ryde
 
 # This file is part of Time-Duration-Locale.
 #
@@ -25,7 +25,7 @@ use lib 't';
 use MyTestHelpers;
 BEGIN { MyTestHelpers::nowarnings() }
 
-my $want_version = 8;
+my $want_version = 9;
 is ($Time::Duration::en_PIGLATIN::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::en_PIGLATIN->VERSION, $want_version,

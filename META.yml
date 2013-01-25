@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               Time-Duration-Locale
-version:            8
+version:            9
 abstract:           Dispatch to language-specific Time::Duration module.
 author:
     - Kevin Ryde <user42@zip.com.au>
@@ -26,35 +26,21 @@ no_index:
         - t
         - inc
         - devel
-        - examples
-generated_by:       ExtUtils::MakeMaker version 6.55_02
+        - xt
+generated_by:       ExtUtils::MakeMaker version 6.57_05
 meta-spec:
     url:      http://module-build.sourceforge.net/META-spec-v1.4.html
     version:  1.4
 optional_features:
-    maximum_devel:
-        description:  Stuff used variously for development.
-        requires:
-            Devel::Peek:        0
-            Pod::Simple::HTML:  0
-            warnings::unused:   0
     maximum_languages:
         description:  Have all language-specific Time::Duration modules available (those known at the time of writing ...).
         requires:
             Time::Duration::fr:  0
+            Time::Duration::id:  0
             Time::Duration::ja:  0
             Time::Duration::pt:  0
             Time::Duration::sv:  0
     maximum_tests:
         description:  Have "make test" do as much as possible.
         requires:
-            File::Spec:          0
-            Parse::CPAN::Meta:   0
-            Test::DistManifest:  0
-            Test::Pod:           1.00
-            Test::YAML::Meta:    0.15
-            threads:             0
-            YAML:                0
-            YAML::Syck:          0
-            YAML::Tiny:          0
-            YAML::XS:            0
+            threads:  0
