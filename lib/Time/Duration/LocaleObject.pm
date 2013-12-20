@@ -26,7 +26,7 @@ use Class::Singleton;
 @ISA = ('Class::Singleton');
 *_new_instance = \&new;
 
-$VERSION = 9;
+$VERSION = 10;
 
 # uncomment this to run the ### lines
 #use Smart::Comments;
@@ -370,6 +370,7 @@ L<Time::Duration>,
 L<Time::Duration::fr>,
 L<Time::Duration::id>,
 L<Time::Duration::ja>,
+L<Time::Duration::pl>,
 L<Time::Duration::pt>,
 L<Time::Duration::sv>,
 L<I18N::LangTags::Detect>

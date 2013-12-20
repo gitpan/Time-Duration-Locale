@@ -22,7 +22,7 @@ use Carp;
 use Time::Duration::LocaleObject;
 use vars qw($VERSION @ISA @EXPORT @EXPORT_OK %EXPORT_TAGS $AUTOLOAD);
 
-$VERSION = 9;
+$VERSION = 10;
 
 use Exporter;
 @ISA = ('Exporter');
@@ -113,6 +113,7 @@ As of January 2013 available language modules on CPAN include
     Time::Duration::fr    French
     Time::Duration::id    Indonesian
     Time::Duration::ja    Japanese
+    Time::Duration::pl    Polish
     Time::Duration::pt    Portuguese
     Time::Duration::sv    Swedish
 
@@ -175,6 +176,7 @@ L<Time::Duration>,
 L<Time::Duration::fr>,
 L<Time::Duration::id>,
 L<Time::Duration::ja>,
+L<Time::Duration::pl>,
 L<Time::Duration::pt>,
 L<Time::Duration::sv>,
 L<I18N::LangTags::Detect>

@@ -21,7 +21,7 @@ use strict;
 use warnings;
 use lib 'lib';
 BEGIN {
-  $ENV{'LANGUAGE'} = 'xx_YY:zz:id:fr_FR:fr:en_PIGLATIN:pt:en_AU:sv';
+  $ENV{'LANGUAGE'} = 'pl:xx_YY:zz:id:fr_FR:fr:en_PIGLATIN:pt:en_AU:sv';
 }
 use Time::Duration::Locale;
 
@@ -41,7 +41,12 @@ print "$progname: main duration() is ",\&duration,"\n";
 }
 
 print "$progname: ",duration(45*86400+6*3600),"\n";
+{
+  my $module = Time::Duration::Locale::module();
+  print "$progname: module ",(defined $module ? $module : 'undef'), "\n";
+}
 
+print "\n";
 $ENV{'LANGUAGE'} = 'pt:en_PIGLATIN:it:sv';
 Time::Duration::Locale::setlocale();
 {

@@ -26,7 +26,7 @@ use vars qw($VERSION);
 
 print "Upper AUTOLOAD func ", \&AUTOLOAD, "\n";
 
-$VERSION = 9;
+$VERSION = 10;
 
 sub _filter {
   my ($str) = @_;

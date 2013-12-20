@@ -26,7 +26,7 @@ use vars qw($VERSION $AUTOLOAD);
 # uncomment this to run the ### lines
 #use Smart::Comments;
 
-$VERSION = 9;
+$VERSION = 10;
 
 my @_target_ISA = ('Exporter');
 

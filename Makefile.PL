@@ -60,6 +60,7 @@ WriteMakefile
          requires => { 'Time::Duration::fr' => 0,
                        'Time::Duration::id' => 0,
                        'Time::Duration::ja' => 0,
+                       'Time::Duration::pl' => 0,
                        'Time::Duration::pt' => 0,
                        'Time::Duration::sv' => 0,
                      },

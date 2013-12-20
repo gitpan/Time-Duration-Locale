@@ -23,7 +23,7 @@ use strict;
 use Time::Duration::Filter;  #  from => 'Time::Duration';
 
 use vars '$VERSION';
-$VERSION = 9;
+$VERSION = 10;
 
 sub _filter {
   my ($str) = @_;

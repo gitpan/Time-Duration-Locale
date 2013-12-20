@@ -25,7 +25,7 @@ use lib 't';
 use MyTestHelpers;
 BEGIN { MyTestHelpers::nowarnings() }
 
-my $want_version = 9;
+my $want_version = 10;
 is ($Time::Duration::Locale::VERSION, $want_version,
     'VERSION variable');
 is (Time::Duration::Locale->VERSION,  $want_version,
